@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Camping Companion (bluetooth)</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_paired_devices">title_paired_devices</string>
+    <string name="title_other_devices">title_other_devices</string>
+    <string name="button_scan">button_scan</string>
+    <string name="none_found">none_found</string>
+    <string name="scanning">scanning</string>
+    <string name="select_device">select_device</string>
+    <string name="none_paired">none_paired</string>
+    <string name="bt_not_enabled_leaving">bt_not_enabled_leaving</string>
+</resources>

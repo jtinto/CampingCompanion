@@ -1,0 +1,4 @@
+#Thu Nov 30 10:04:18 CST 2017
+base.0=/Users/giangly/Downloads/CampingCompanion(bluetooth)/app/build/intermediates/transforms/dexMerger/debug/9
+path.0=classes.dex
+renamed.0=classes.dex
