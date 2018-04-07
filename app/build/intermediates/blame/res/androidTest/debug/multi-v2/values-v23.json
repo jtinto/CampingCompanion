@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/giangly/Desktop/GitHub/CampingCompanion/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-v23/values-v23.xml",
+            "outputFile": "/Users/giangly/Downloads/CampingCompanion(bluetooth)/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-v23/values-v23.xml",
             "map": [
                 {
                     "source": "/Users/giangly/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/276c9e9b33f58b4fd3c0777758b95f50/res/values-v23/values-v23.xml",
@@ -21,22 +21,6 @@
             "map": [
                 {
                     "source": "/Users/giangly/Downloads/CampingCompanion(bluetooth)/C:\\Users\\jtint\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\841b26f5fe94c9ebdba7944da8b2e4fd\\res\\values-v23\\values-v23.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,19,32,33,34,35,36",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,190,325,400,487,1277,2079,2206,2311,2426,2533",
-                        "endLines": "2,3,4,5,18,31,32,33,34,35,36",
-                        "endColumns": "134,134,74,86,12,12,126,104,114,106,112",
-                        "endOffsets": "185,320,395,482,1272,2074,2201,2306,2421,2528,2641"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "/Users/giangly/Downloads/CampingCompanion(bluetooth)/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-v23/values-v23.xml",
-            "map": [
-                {
-                    "source": "/Users/giangly/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/276c9e9b33f58b4fd3c0777758b95f50/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,19,32,33,34,35,36",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4",

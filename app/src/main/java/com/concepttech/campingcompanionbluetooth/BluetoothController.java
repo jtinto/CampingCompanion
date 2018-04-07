@@ -21,6 +21,11 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.AlertDialog;
+import android.widget.EditText;
+import android.text.InputType;
+import android.content.DialogInterface;
+
 
 
 /**
@@ -700,7 +705,23 @@ public class BluetoothController extends Fragment implements SeekBar.OnSeekBarCh
 
     //this finction is called when a command is recieved, whichi should be nver on a pone so TODO: make code for command sent by hub
     private void CommandMessage(String message){
-
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle(multiLangTranslation(R.string.manualshippermessage));
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        input.setRawInputType(Configuration.KEYBOARD_12KEY);
+        alert.setView(input);
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //Put actions for OK button here
+            }
+        });
+        alert.setNegativeButton(multiLangTranslation(R.string.cancel), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //Put actions for CANCEL button here, or leave in blank
+            }
+        });
+        alert.show();
     }
     //this function is called when hubn sends a confirmation of the command, check data sent to match command and resend command if necessary
     private void CommandConfirmMessage(String message){

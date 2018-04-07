@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/giangly/Desktop/GitHub/CampingCompanion/app/src/main/assets"/><source path="/Users/giangly/Desktop/GitHub/CampingCompanion/app/build/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/Users/giangly/Desktop/GitHub/CampingCompanion/app/src/debug/assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/yang/Downloads/CampingCompanion-master/app/src/main/assets"/><source path="/Users/yang/Downloads/CampingCompanion-master/app/build/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/Users/yang/Downloads/CampingCompanion-master/app/src/debug/assets"/></dataSet></merger>

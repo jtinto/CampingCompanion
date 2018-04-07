@@ -35,7 +35,7 @@
             ]
         },
         {
-            "outputFile": "/Users/giangly/Desktop/GitHub/CampingCompanion/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
+            "outputFile": "/Users/giangly/Downloads/CampingCompanion(bluetooth)/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
             "map": [
                 {
                     "source": "/Users/giangly/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/f01bd1758da6d52abd810f308f294de8/res/values-v16/values-v16.xml",
@@ -69,10 +69,10 @@
             ]
         },
         {
-            "outputFile": "/Users/giangly/Downloads/CampingCompanion(bluetooth)/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
+            "outputFile": "/Users/yang/Downloads/CampingCompanion-master/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "/Users/giangly/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/f01bd1758da6d52abd810f308f294de8/res/values-v16/values-v16.xml",
+                    "source": "/Users/yang/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/9fe2d1871c8c2221074f80385f8568da/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -82,7 +82,7 @@
                     }
                 },
                 {
-                    "source": "/Users/giangly/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/276c9e9b33f58b4fd3c0777758b95f50/res/values-v16/values-v16.xml",
+                    "source": "/Users/yang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/2120f40efdfb146347648b6fd47bbbcd/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

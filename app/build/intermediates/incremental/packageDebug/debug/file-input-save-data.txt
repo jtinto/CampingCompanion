@@ -1,7 +1,7 @@
 #Internal package file, do not edit.
-#Thu Nov 30 11:31:00 CST 2017
+#Tue Apr 03 16:25:00 CDT 2018
 0.baseType=DIRECTORY
-0.base=/Users/giangly/Desktop/GitHub/CampingCompanion/app/build/intermediates/transforms/dexMerger/debug/49
+0.base=/Users/yang/Downloads/CampingCompanion-master/app/build/intermediates/transforms/dexMerger/debug/49
 0.path=classes.dex
 0.set=DEX
 count=1
