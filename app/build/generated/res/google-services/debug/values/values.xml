@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">578190593142-948bsoml0k5qijnbgv45pc88udfe2l63.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://campingcompanion-201021.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">578190593142</string>
+    <string name="google_api_key" translatable="false">AIzaSyCxPF6cFLPVYlKkCoyvA2lhDp7pAipw0aE</string>
+    <string name="google_app_id" translatable="false">1:578190593142:android:5fd90b5a2261b27e</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCxPF6cFLPVYlKkCoyvA2lhDp7pAipw0aE</string>
+    <string name="google_storage_bucket" translatable="false">campingcompanion-201021.appspot.com</string>
+    <string name="project_id" translatable="false">campingcompanion-201021</string>
+</resources>

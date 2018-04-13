@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "578190593142",
+    "firebase_url": "https://campingcompanion-201021.firebaseio.com",
+    "project_id": "campingcompanion-201021",
+    "storage_bucket": "campingcompanion-201021.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:578190593142:android:5fd90b5a2261b27e",
+        "android_client_info": {
+          "package_name": "com.concepttech.campingcompanionbluetooth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "578190593142-dp45n4akhgfgfv27ihnvdoni6os5ljgc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.concepttech.campingcompanionbluetooth",
+            "certificate_hash": "fd12951acfc301102fece31ff24cc13def721e74"
+          }
+        },
+        {
+          "client_id": "578190593142-948bsoml0k5qijnbgv45pc88udfe2l63.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxPF6cFLPVYlKkCoyvA2lhDp7pAipw0aE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "578190593142-948bsoml0k5qijnbgv45pc88udfe2l63.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
