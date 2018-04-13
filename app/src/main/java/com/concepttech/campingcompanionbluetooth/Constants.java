@@ -69,7 +69,7 @@ public class Constants {
                 "OTHERNUMLIGHTS", "OTHERLIGHTSTATUS", "CONNECTIONERROR", "MESSAGEDEST", "MESSAGESOURCE",
                 "REASON"
     };
-    public final int LabelIndex(String label){
+    public static int LabelIndex(String label){
         if(label != null){
             if(label.length() > 0){
                 int i;
@@ -82,7 +82,7 @@ public class Constants {
         }
         return -1;
     }
-    public final boolean isValidLabel(String labelcandidate){
+    public static boolean isValidLabel(String labelcandidate){
         if(labelcandidate != null){
             if(labelcandidate.length() > 0){
                 int i;

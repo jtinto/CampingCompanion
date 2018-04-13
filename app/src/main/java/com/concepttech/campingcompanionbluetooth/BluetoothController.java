@@ -16,16 +16,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.app.AlertDialog;
-import android.widget.EditText;
-import android.text.InputType;
-import android.content.DialogInterface;
 
+import static com.concepttech.campingcompanionbluetooth.Constants.LabelIndex;
+import static com.concepttech.campingcompanionbluetooth.Constants.isValidLabel;
 
 
 /**
@@ -71,155 +68,15 @@ public class BluetoothController extends Fragment implements SeekBar.OnSeekBarCh
      * Local Bluetooth adapter
      */
     private BluetoothAdapter mBluetoothAdapter = null;
-    private final Constants constants = new Constants();
     /**
      * Member object for the chat services
      */
+    private DeviceState CurrentState;
     private CustomBlueToothAdapter mCustomBluetoothAdapter = null;
     public BluetoothController() {
         // Required empty public constructor
     }
 
-    private static final class State {
-        private int batterylevel, numlights, solarpower, windpower, numnodes;
-        private int[][] lightcolors;
-        private double temperature, humidity, barometricpressure, latitude, longitude;
-        private boolean broadcast;
-        private boolean[] lightstatus, networked, allowscontrol, slave, connectionerror;
-        private boolean[][] otherlightstatuses;
-        private String hubname;
-        private String[] lightnames, nodenames;
-        private String[][] otherlightnames;
-
-        public State(){
-            lightcolors = new int[1][];
-            lightcolors[0] = new int[3];
-            lightcolors[0][0] = 0;
-            lightcolors[0][1] = 0;
-            lightcolors[0][2] = 0;
-            lightstatus = new boolean[1];
-            lightstatus[0] = false;
-        }
-        public String getLightStatusDataString() {
-            String returnstring = "Error";
-            if (lightstatus != null) {
-                if (lightstatus.length > 0) {
-                    int i;
-                    returnstring = Constants.BODYBEGIN + Constants.ASIZE + Constants.LABELDATASEP + lightstatus.length +
-                            Constants.DATAEND + Constants.VALUES + Constants.LABELDATASEP;
-                    for (i = 0; i < lightstatus.length; i++) {
-                        returnstring += lightstatus[i];
-                        if (i != lightstatus.length - 1) returnstring += Constants.DATASEP;
-                    }
-                    returnstring += Constants.DATAEND + Constants.BODYEND;
-                }
-            }
-            return returnstring;
-        }
-        public String getLightColorDataString() {
-            String returnstring = "Error";
-            boolean error = false;
-            if (lightcolors != null) {
-                if (lightcolors.length > 0) {
-                    int i;
-                    returnstring = Constants.BODYBEGIN + Constants.ROWS + Constants.LABELDATASEP + lightcolors.length +
-                            Constants.DATAEND + Constants.COLUMNS + Constants.LABELDATASEP + Constants.MAXCOLORCODES +
-                            Constants.DATAEND + Constants.VALUES + Constants.LABELDATASEP;
-                    for (i = 0; i < lightcolors.length; i++) {
-                        if (lightcolors[i] != null) {
-                            int RGBi;
-                            if (i != 0) returnstring += Constants.DATASEP;
-                            for (RGBi = 0; RGBi < Constants.MAXCOLORCODES; RGBi++) {
-                                if (lightcolors[i][RGBi] >= 0 && lightcolors[i][RGBi] <= Constants.MAXCOLORCODEVALUE) {
-                                    returnstring += lightcolors[i][RGBi];
-                                } else error = true;
-                                if (error) {
-                                    error = false;
-                                    returnstring += "BadData";
-                                }
-                                if (RGBi != Constants.MAXCOLORCODES - 1)
-                                    returnstring += Constants.DATASEP;
-                            }
-                        } else returnstring += "BadData|BadData|BadData";
-                    }
-                    returnstring += Constants.DATAEND + Constants.BODYEND;
-                }
-            }
-            return returnstring;
-        }
-
-        public double getTemperature() {
-            return temperature;
-        }
-        public double getHumidity() {
-            return humidity;
-        }
-        public double getBarometricpressure() {
-            return barometricpressure;
-        }
-        public double getLatitude() {
-            return latitude;
-        }
-        public double getLongitude() {
-            return longitude;
-        }
-        public void setTemperature(double temperature) {
-            this.temperature = temperature;
-        }
-        public void setHumidity(double humidity) {
-            this.humidity = humidity;
-        }
-        public void setBarometricpressure(double barometricpressure) {
-            this.barometricpressure = barometricpressure;
-        }
-        public void setLatitude(double latitude) {
-            this.latitude = latitude;
-        }
-        public void setLongitude(double longitude) {
-            this.longitude = longitude;
-        }
-        public void TurnLightOn(int[] which){
-            if(which != null) {
-                if (lightstatus != null) {
-                    int i;
-                    for(i = 0; i < which.length; i++) {
-                        if (which[i] < lightstatus.length) {
-                            lightstatus[which[i]] = true;
-                        }
-                    }
-                }
-            }
-        }
-        public void TurnLightOff(int[] which){
-            if(which != null) {
-                if (lightstatus != null) {
-                    int i;
-                    for(i = 0; i < which.length; i++) {
-                        if (which[i] < lightstatus.length) {
-                            lightstatus[which[i]] = false;
-                        }
-                    }
-                }
-            }
-        }
-        public void setLightcolors(int which, int red, int green, int blue){
-            if(lightcolors != null){
-                if(which < lightcolors.length) {
-                    if (lightcolors[which] != null) {
-                        if (lightcolors[which].length == Constants.MAXCOLORCODES && red >= 0 && red < Constants.MAXCOLORCODEVALUE
-                                && green >= 0 && green < Constants.MAXCOLORCODEVALUE
-                                && blue >= 0 && blue < Constants.MAXCOLORCODEVALUE) {
-                            lightcolors[which][0] = red;
-                            lightcolors[which][1] = green;
-                            lightcolors[which][2] = blue;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private State CurrentState;
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -314,7 +171,67 @@ public class BluetoothController extends Fragment implements SeekBar.OnSeekBarCh
         }
     }
 
-    private void initViews(View view){
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_bluetooth_controller, container, false);
+        InitializeViews(v);
+        // Inflate the layout for this fragment
+        return v;
+
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        // If BT is not on, request that it be enabled.
+        // setupChat() will then be called during onActivityResult
+        if (!mBluetoothAdapter.isEnabled()) {
+            Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
+            // Otherwise, setup the chat session
+        } else if (mCustomBluetoothAdapter == null) {
+            //need resume handling here
+            setup();
+        }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // Performing this check in onResume() covers the case in which BT was
+        // not enabled during onStart(), so we were paused to enable it...
+        // onResume() will be called when ACTION_REQUEST_ENABLE activity returns.
+        if (mCustomBluetoothAdapter != null) {
+            // Only if the state is STATE_NONE, do we know that we haven't started already
+            if (mCustomBluetoothAdapter.getState() == CustomBlueToothAdapter.STATE_NONE) {
+                // Start the Bluetooth chat services
+                mCustomBluetoothAdapter.start();
+            }
+        }
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mCustomBluetoothAdapter != null) {
+            mCustomBluetoothAdapter.stop();
+        }
+    }
+
+    public void SetParameters(DeviceState state){
+        if(state != null)
+        CurrentState = state;
+    }
+    private void InitializeViews(View view){
         RedSeekBar = view.findViewById(R.id.redseekbar);
         GreenSeekBar = view.findViewById(R.id.greenseekbar);
         BlueSeekBar = view.findViewById(R.id.blueseekbar);
@@ -340,7 +257,7 @@ public class BluetoothController extends Fragment implements SeekBar.OnSeekBarCh
         MakeDiscoverableButton.setOnClickListener(this);
         PairDeviceButton.setOnClickListener(this);
         TestUpdateStringButton.setOnClickListener(this);
-        CurrentState = new State();
+        CurrentState = new DeviceState();
     }
     private void setColorPreviewTextView(){
         if(ColorPreviewTextView != null){
@@ -360,64 +277,6 @@ public class BluetoothController extends Fragment implements SeekBar.OnSeekBarCh
             LongitudeTextView.setText(Double.toString(CurrentState.getLongitude())+ " deg");
         }
     }
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_bluetooth_controller, container, false);
-        initViews(v);
-        // Inflate the layout for this fragment
-        return v;
-
-    }
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            FragmentActivity activity = getActivity();
-            switch (msg.what) {
-                case Constants.MESSAGE_STATE_CHANGE:
-                    switch (msg.arg1) {
-                        case CustomBlueToothAdapter.STATE_CONNECTED:
-                            //setStatus(getString(R.string.title_connected_to, mConnectedDeviceName));
-                            break;
-                        case CustomBlueToothAdapter.STATE_CONNECTING:
-                            //setStatus(R.string.title_connecting);
-                            break;
-                        case CustomBlueToothAdapter.STATE_LISTEN:
-                        case CustomBlueToothAdapter.STATE_NONE:
-                            //setStatus(R.string.title_not_connected);
-                            break;
-                    }
-                    break;
-                case Constants.MESSAGE_WRITE:
-                    byte[] writeBuf = (byte[]) msg.obj;
-                    // construct a string from the buffer
-                    String writeMessage = new String(writeBuf);
-                    //this should match message just sent, log it here too
-                    break;
-                case Constants.MESSAGE_READ:
-                    byte[] readBuf = (byte[]) msg.obj;
-                    // construct a string from the valid bytes in the buffer
-                    String readMessage = new String(readBuf, 0, msg.arg1);
-                    HandleRecievedMessage(readMessage);
-                    break;
-                case Constants.MESSAGE_DEVICE_NAME:
-                    // save the connected device's name
-                    mConnectedDeviceName = msg.getData().getString(Constants.DEVICE_NAME);
-                    if (null != activity) {
-                        Toast.makeText(activity, "Connected to "
-                                + mConnectedDeviceName, Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-                case Constants.MESSAGE_TOAST:
-                    if (null != activity) {
-                        Toast.makeText(activity, msg.getData().getString(Constants.TOAST),
-                                Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-            }
-        }
-    };
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -466,53 +325,6 @@ public class BluetoothController extends Fragment implements SeekBar.OnSeekBarCh
         // Attempt to connect to the device
         mCustomBluetoothAdapter.connect(device, secure);
     }
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-    @Override
-    public void onStart() {
-        super.onStart();
-        // If BT is not on, request that it be enabled.
-        // setupChat() will then be called during onActivityResult
-        if (!mBluetoothAdapter.isEnabled()) {
-            Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
-            // Otherwise, setup the chat session
-        } else if (mCustomBluetoothAdapter == null) {
-            //need resume handling here
-            setup();
-        }
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        // Performing this check in onResume() covers the case in which BT was
-        // not enabled during onStart(), so we were paused to enable it...
-        // onResume() will be called when ACTION_REQUEST_ENABLE activity returns.
-        if (mCustomBluetoothAdapter != null) {
-            // Only if the state is STATE_NONE, do we know that we haven't started already
-            if (mCustomBluetoothAdapter.getState() == CustomBlueToothAdapter.STATE_NONE) {
-                // Start the Bluetooth chat services
-                mCustomBluetoothAdapter.start();
-            }
-        }
-    }
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mCustomBluetoothAdapter != null) {
-            mCustomBluetoothAdapter.stop();
-        }
-    }
-    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
@@ -588,10 +400,8 @@ public class BluetoothController extends Fragment implements SeekBar.OnSeekBarCh
             }
         //}
     }
-
     //this function is called when the message recieved has the INIT value type, it first checks to verify if init has already been done
     //if it has then a user interaction will be required to confirm the new state that will be created
-
     private void InitMessage(String message){
         if(mCustomBluetoothAdapter.getState() == CustomBlueToothAdapter.STATE_CONNECTED){
             if(CurrentState != null){
@@ -603,14 +413,11 @@ public class BluetoothController extends Fragment implements SeekBar.OnSeekBarCh
             }
         }
     }
-
     //this function should never be called on the phone if reached and called it will not produce errors but something needs to be done because data is bad
     //or hub is not a hub
-
     private void UpdateFromPhoneMessage(String message){
 
     }
-
     //this function is called when phone recieves message to update data like temp or gps
     private void UpdateFromHubMessage(String message){
         Log.d(TAG,"UpdateFromHubMessage");
@@ -647,7 +454,7 @@ public class BluetoothController extends Fragment implements SeekBar.OnSeekBarCh
                         }
                         Log.d(TAG,"LABEL : " + label + " BODY: " + labeldata);
                         if(label.length() > 0) {
-                            int labelindex = constants.LabelIndex(label);
+                            int labelindex = LabelIndex(label);
                             switch (labelindex){
                                 case 0:
                                     Log.d(TAG,"TEMPERATURE LABEL");
@@ -702,9 +509,8 @@ public class BluetoothController extends Fragment implements SeekBar.OnSeekBarCh
             UpdateValues();
         }
     }
-
     //this finction is called when a command is recieved, whichi should be nver on a pone so TODO: make code for command sent by hub
-    private void CommandMessage(String message){
+    private void CommandMessage(String message){/*
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(multiLangTranslation(R.string.manualshippermessage));
         final EditText input = new EditText(this);
@@ -721,7 +527,7 @@ public class BluetoothController extends Fragment implements SeekBar.OnSeekBarCh
                 //Put actions for CANCEL button here, or leave in blank
             }
         });
-        alert.show();
+        alert.show();*/
     }
     //this function is called when hubn sends a confirmation of the command, check data sent to match command and resend command if necessary
     private void CommandConfirmMessage(String message){
@@ -773,9 +579,9 @@ public class BluetoothController extends Fragment implements SeekBar.OnSeekBarCh
                 body = Constants.BODYBEGIN;
                 for(i = 0; i < labels.length; i++){
                     if(labels[i] != null){
-                        if(labels[i].length() > 0 && constants.isValidLabel(labels[i])){
+                        if(labels[i].length() > 0 && isValidLabel(labels[i])){
                             body += labels[i] + Constants.LABELDATASEP;
-                            int index = constants.LabelIndex(labels[i]);
+                            int index = LabelIndex(labels[i]);
                             switch(index){
                                 case 0:
                                     break;
@@ -999,7 +805,6 @@ public class BluetoothController extends Fragment implements SeekBar.OnSeekBarCh
     //function to handle errors, mostly to reduce code, takes the log message to post as an argument
     //and will always check the argument to be valid, also requires a flag RTR1 to be set in order
     //to proceed with request
-
     private void RequestResend(String messagetopost){
         if(messagetopost!=null){
             if(messagetopost.length()>0){
@@ -1023,9 +828,7 @@ public class BluetoothController extends Fragment implements SeekBar.OnSeekBarCh
             Log.d(TAG,Constants.ERR + Constants.MESSTOPOSTNULL);
         }
     }
-
     //called from overloaded form after log message is posted and flags rotated, creates string to send, saves it and then sets a flag to look for a specific confirmation
-
     private void RequestResend(){
         if(!RTR1&&RTR2){
             RTR2 = false;
@@ -1049,4 +852,53 @@ public class BluetoothController extends Fragment implements SeekBar.OnSeekBarCh
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+    private final Handler mHandler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            FragmentActivity activity = getActivity();
+            switch (msg.what) {
+                case Constants.MESSAGE_STATE_CHANGE:
+                    switch (msg.arg1) {
+                        case CustomBlueToothAdapter.STATE_CONNECTED:
+                            //setStatus(getString(R.string.title_connected_to, mConnectedDeviceName));
+                            break;
+                        case CustomBlueToothAdapter.STATE_CONNECTING:
+                            //setStatus(R.string.title_connecting);
+                            break;
+                        case CustomBlueToothAdapter.STATE_LISTEN:
+                        case CustomBlueToothAdapter.STATE_NONE:
+                            //setStatus(R.string.title_not_connected);
+                            break;
+                    }
+                    break;
+                case Constants.MESSAGE_WRITE:
+                    byte[] writeBuf = (byte[]) msg.obj;
+                    // construct a string from the buffer
+                    String writeMessage = new String(writeBuf);
+                    //this should match message just sent, log it here too
+                    break;
+                case Constants.MESSAGE_READ:
+                    byte[] readBuf = (byte[]) msg.obj;
+                    // construct a string from the valid bytes in the buffer
+                    String readMessage = new String(readBuf, 0, msg.arg1);
+                    HandleRecievedMessage(readMessage);
+                    break;
+                case Constants.MESSAGE_DEVICE_NAME:
+                    // save the connected device's name
+                    mConnectedDeviceName = msg.getData().getString(Constants.DEVICE_NAME);
+                    if (null != activity) {
+                        Toast.makeText(activity, "Connected to "
+                                + mConnectedDeviceName, Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case Constants.MESSAGE_TOAST:
+                    if (null != activity) {
+                        Toast.makeText(activity, msg.getData().getString(Constants.TOAST),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+            }
+            return true;
+        }
+    });
 }

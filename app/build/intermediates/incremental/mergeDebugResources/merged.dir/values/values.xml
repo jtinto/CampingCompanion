@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
     <attr format="reference" name="constraintSet"/>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="dimension" name="height"/>
@@ -485,6 +485,7 @@
     <integer name="abc_config_activityShortDur">150</integer>
     <integer name="cancel_button_image_alpha">127</integer>
     <integer name="config_tooltipAnimTime">150</integer>
+    <integer name="google_play_services_version">12211000</integer>
     <integer name="status_bar_notification_info_maxnum">999</integer>
     <string name="abc_action_bar_home_description">Navigate home</string>
     <string name="abc_action_bar_home_description_format">%1$s, %2$s</string>
@@ -520,9 +521,18 @@
     <string name="app_name">Camping Companion (bluetooth)</string>
     <string name="bt_not_enabled_leaving">bt_not_enabled_leaving</string>
     <string name="button_scan">button_scan</string>
+    <string name="common_google_play_services_unknown_issue"><ns1:g id="app_name">%1$s</ns1:g> is having trouble with Google Play services. Please try again.</string>
+    <string name="default_web_client_id" translatable="false">578190593142-948bsoml0k5qijnbgv45pc88udfe2l63.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://campingcompanion-201021.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">578190593142</string>
+    <string name="google_api_key" translatable="false">AIzaSyCxPF6cFLPVYlKkCoyvA2lhDp7pAipw0aE</string>
+    <string name="google_app_id" translatable="false">1:578190593142:android:5fd90b5a2261b27e</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCxPF6cFLPVYlKkCoyvA2lhDp7pAipw0aE</string>
+    <string name="google_storage_bucket" translatable="false">campingcompanion-201021.appspot.com</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="none_found">none_found</string>
     <string name="none_paired">none_paired</string>
+    <string name="project_id" translatable="false">campingcompanion-201021</string>
     <string name="scanning">scanning</string>
     <string name="search_menu_title">Search</string>
     <string name="select_device">select_device</string>

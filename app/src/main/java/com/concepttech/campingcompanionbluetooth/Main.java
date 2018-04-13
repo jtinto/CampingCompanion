@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 public class Main extends FragmentActivity implements BluetoothController.OnFragmentInteractionListener{
 
+    private DeviceState deviceState;
     public void onFragmentInteraction(Uri uri){
 
     }
@@ -22,8 +23,10 @@ public class Main extends FragmentActivity implements BluetoothController.OnFrag
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
+            deviceState = new DeviceState();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             BluetoothController fragment = new BluetoothController();
+            fragment.SetParameters(deviceState);
             transaction.replace(R.id.fragment_holder, fragment);
             transaction.commit();
         }

@@ -1,40 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/giangly/Downloads/CampingCompanion(bluetooth)/D:\\jtint\\AndroidProjects\\CampingCompanion(bluetooth)\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v18\\values-v18.xml",
+            "outputFile": "D:\\jtint\\AndroidProjects\\CampingCompanion\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v18\\values-v18.xml",
             "map": [
                 {
-                    "source": "/Users/giangly/Downloads/CampingCompanion(bluetooth)/C:\\Users\\jtint\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\841b26f5fe94c9ebdba7944da8b2e4fd\\res\\values-v18\\values-v18.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "48",
-                        "endOffsets": "99"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "/Users/giangly/Downloads/CampingCompanion(bluetooth)/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v18/values-v18.xml",
-            "map": [
-                {
-                    "source": "/Users/giangly/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/276c9e9b33f58b4fd3c0777758b95f50/res/values-v18/values-v18.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "48",
-                        "endOffsets": "99"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "/Users/yang/Downloads/CampingCompanion-master/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v18/values-v18.xml",
-            "map": [
-                {
-                    "source": "/Users/yang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/2120f40efdfb146347648b6fd47bbbcd/res/values-v18/values-v18.xml",
+                    "source": "C:\\Users\\jtint\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\855f06cfe2d512b067f8379992b68d38\\res\\values-v18\\values-v18.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

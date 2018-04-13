@@ -1,40 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/giangly/Downloads/CampingCompanion(bluetooth)/D:\\jtint\\AndroidProjects\\CampingCompanion(bluetooth)\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-large-v4\\values-large-v4.xml",
+            "outputFile": "D:\\jtint\\AndroidProjects\\CampingCompanion\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-large-v4\\values-large-v4.xml",
             "map": [
                 {
-                    "source": "/Users/giangly/Downloads/CampingCompanion(bluetooth)/C:\\Users\\jtint\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\841b26f5fe94c9ebdba7944da8b2e4fd\\res\\values-large-v4\\values-large-v4.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10",
-                        "startColumns": "4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,114,185,256,326,396,464,532,636",
-                        "endColumns": "58,70,70,69,69,67,67,103,115",
-                        "endOffsets": "109,180,251,321,391,459,527,631,747"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "/Users/yang/Downloads/CampingCompanion-master/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-large-v4/values-large-v4.xml",
-            "map": [
-                {
-                    "source": "/Users/yang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/2120f40efdfb146347648b6fd47bbbcd/res/values-large-v4/values-large-v4.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10",
-                        "startColumns": "4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,114,185,256,326,396,464,532,636",
-                        "endColumns": "58,70,70,69,69,67,67,103,115",
-                        "endOffsets": "109,180,251,321,391,459,527,631,747"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "/Users/giangly/Downloads/CampingCompanion(bluetooth)/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-large-v4/values-large-v4.xml",
-            "map": [
-                {
-                    "source": "/Users/giangly/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/276c9e9b33f58b4fd3c0777758b95f50/res/values-large-v4/values-large-v4.xml",
+                    "source": "C:\\Users\\jtint\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\855f06cfe2d512b067f8379992b68d38\\res\\values-large-v4\\values-large-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
                         "startColumns": "4,4,4,4,4,4,4,4,4",
