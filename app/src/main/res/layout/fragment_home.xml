@@ -1,14 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    tools:context=".HomeFragment"
+    android:orientation="vertical"
+    android:background="@drawable/homebackground">
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="70dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/peblgreenroundedcornerssemitransparent"
+        android:text="@string/LightsText"
+        android:id="@+id/HomeFragmentLightsButton"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="70dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/peblgreenroundedcornerssemitransparent"
+        android:text="@string/StatusText"
+        android:id="@+id/HomeFragmentStatusButton"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="70dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/peblgreenroundedcornerssemitransparent"
+        android:text="@string/LocationText"
+        android:id="@+id/HomeFragmentLocationButton" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="70dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/peblgreenroundedcornerssemitransparent"
+        android:text="@string/CaptainsLogText"
+        android:id="@+id/HomeFragmentLogButton"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="70dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/peblgreenroundedcornerssemitransparent"
+        android:text="@string/ConnectText"
+        android:id="@+id/HomeFragmentConnnectButton"/>
 
-</FrameLayout>
+</LinearLayout>

@@ -22,38 +22,17 @@ import java.util.Set;
 
 public class DeviceListActivity extends AppCompatActivity {
 
-    /**
-     * Tag for Log
-     */
     private static final String TAG = "DeviceListActivity";
-
-    /**
-     * Return Intent extra
-     */
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
-
-    /**
-     * Member fields
-     */
     private BluetoothAdapter mBtAdapter;
-
-    /**
-     * Newly discovered devices
-     */
     private ArrayAdapter<String> mNewDevicesArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Setup the window
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_device_list);
-
-        // Set result CANCELED in case the user backs out
         setResult(Activity.RESULT_CANCELED);
-
-        // Initialize the button to perform device discovery
         Button scanButton = (Button) findViewById(R.id.button_scan);
         scanButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -61,9 +40,6 @@ public class DeviceListActivity extends AppCompatActivity {
                 v.setVisibility(View.GONE);
             }
         });
-
-        // Initialize array adapters. One for already paired devices and
-        // one for newly discovered devices
         ArrayAdapter<String> pairedDevicesArrayAdapter =
                 new ArrayAdapter<String>(this, R.layout.device_name);
         mNewDevicesArrayAdapter = new ArrayAdapter<String>(this, R.layout.device_name);

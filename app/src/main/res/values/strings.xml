@@ -3,12 +3,22 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_paired_devices">title_paired_devices</string>
-    <string name="title_other_devices">title_other_devices</string>
-    <string name="button_scan">button_scan</string>
-    <string name="none_found">none_found</string>
+    <string name="title_paired_devices">Paired Devices</string>
+    <string name="title_other_devices">New Devices</string>
+    <string name="button_scan">Scan</string>
+    <string name="none_found">No Devices Found</string>
     <string name="scanning">scanning</string>
     <string name="select_device">select_device</string>
-    <string name="none_paired">none_paired</string>
+    <string name="none_paired">No Devices Paired</string>
     <string name="bt_not_enabled_leaving">bt_not_enabled_leaving</string>
+    <!-- String for home activity-->
+    <string name="LightsText">Lights</string>
+    <string name="StatusText">Status</string>
+    <string name="LocationText">Location</string>
+    <string name="CaptainsLogText">Captains Log</string>
+    <string name="ConnectText">Connect to PEBL</string>
+    <!-- String for set up activity-->
+    <string name="StartText">Start Here</string>
+    <!-- String for connections activity-->
+    <string name="ConnectionHeader">The available devices are shown\nbelow, please select your\nPEBL below</string>
 </resources>

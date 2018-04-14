@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InitialSetUpFragment"
+    android:orientation="vertical"
+    android:background="@drawable/setupbackground"
+    android:gravity="center|bottom">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="70dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/setupstartbutton"
+        android:id="@+id/SetUpStartButton"
+        android:textColor="@color/White"
+        />
+</LinearLayout>

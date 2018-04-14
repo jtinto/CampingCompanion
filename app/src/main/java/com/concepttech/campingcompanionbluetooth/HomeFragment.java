@@ -7,28 +7,42 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import static com.concepttech.campingcompanionbluetooth.Constants.HomeFragmentLaunchConnection;
+import static com.concepttech.campingcompanionbluetooth.Constants.HomeFragmentLaunchLights;
+import static com.concepttech.campingcompanionbluetooth.Constants.HomeFragmentLaunchLocation;
+import static com.concepttech.campingcompanionbluetooth.Constants.HomeFragmentLaunchLog;
+import static com.concepttech.campingcompanionbluetooth.Constants.HomeFragmentLaunchStatus;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link HomeFragment.OnFragmentInteractionListener} interface
+ * {@link HomeFragment.HomeCallback} interface
  * to handle interaction events.
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private View ThisView;
+    private Button LightsButton,StatusButton,LocationButton,CaptainsLogButton,ConnectionButton;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private DeviceState CurrentState;
 
-    private OnFragmentInteractionListener mListener;
+    private HomeCallback mCallback;
 
+    public void SetParameters(DeviceState state){
+        if(state != null)
+            CurrentState = state;
+    }
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -50,7 +64,27 @@ public class HomeFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
+    @Override
+    public void onClick(View view){
+        switch (view.getId())
+        {
+            case R.id.HomeFragmentLightsButton:
+                mCallback.HomeCallback(HomeFragmentLaunchLights);
+                break;
+            case R.id.HomeFragmentStatusButton:
+                mCallback.HomeCallback(HomeFragmentLaunchStatus);
+                break;
+            case R.id.HomeFragmentLocationButton:
+                mCallback.HomeCallback(HomeFragmentLaunchLocation);
+                break;
+            case R.id.HomeFragmentLogButton:
+                mCallback.HomeCallback(HomeFragmentLaunchLog);
+                break;
+            case R.id.HomeFragmentConnnectButton:
+                mCallback.HomeCallback(HomeFragmentLaunchConnection);
+                break;
+        }
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,22 +97,28 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        ThisView = inflater.inflate(R.layout.fragment_home, container, false);
+        Initialize();
+        return ThisView;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    private void Initialize(){
+        LightsButton = ThisView.findViewById(R.id.HomeFragmentLightsButton);
+        StatusButton = ThisView.findViewById(R.id.HomeFragmentStatusButton);
+        LocationButton = ThisView.findViewById(R.id.HomeFragmentLocationButton);
+        CaptainsLogButton = ThisView.findViewById(R.id.HomeFragmentLogButton);
+        ConnectionButton = ThisView.findViewById(R.id.HomeFragmentConnnectButton);
+        ConnectionButton.setOnClickListener(this);
+        StatusButton.setOnClickListener(this);
+        LocationButton.setOnClickListener(this);
+        CaptainsLogButton.setOnClickListener(this);
+        ConnectionButton.setOnClickListener(this);
     }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof HomeCallback) {
+            mCallback = (HomeCallback) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -88,7 +128,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        mCallback = null;
     }
 
     /**
@@ -101,8 +141,8 @@ public class HomeFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    public interface HomeCallback {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void HomeCallback(String request);
     }
 }

@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:2:1-27:12
+ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:2:1-29:12
+INJECTED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:2:1-29:12
+INJECTED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:2:1-29:12
+INJECTED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:2:1-29:12
 MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\jtint\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\855f06cfe2d512b067f8379992b68d38\AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\jtint\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\c2fba051b1c0c2784d53d1c8d2bd36de\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.firebase:firebase-core:12.0.1] C:\Users\jtint\.gradle\caches\transforms-1\files-1.1\firebase-core-12.0.1.aar\1a3a575489f8effee54eadff37f8a474\AndroidManifest.xml:2:1-6:12
@@ -28,20 +28,20 @@ MERGED from [com.google.firebase:firebase-common-license:12.0.1] C:\Users\jtint\
 MERGED from [com.google.firebase:firebase-analytics-impl-license:12.0.1] C:\Users\jtint\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-license-12.0.1.aar\019b9422ca68babb84f5cb0677cb5f61\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-tasks-license:12.0.1] C:\Users\jtint\.gradle\caches\transforms-1\files-1.1\play-services-tasks-license-12.0.1.aar\d329f97b1504440a6579121bfe44a14e\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:firebase-iid-license:12.0.1] C:\Users\jtint\.gradle\caches\transforms-1\files-1.1\firebase-iid-license-12.0.1.aar\024754ca129100715086d4f4d9a16062\AndroidManifest.xml:17:1-24:12
-INJECTED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:2:1-27:12
+INJECTED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:2:1-29:12
+INJECTED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:2:1-29:12
+INJECTED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:2:1-29:12
 	package
 		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:3:5-56
 		INJECTED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml
 		INJECTED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml
-		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:2:1-27:12
+		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:2:1-29:12
 		INJECTED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml
-		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:2:1-27:12
+		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:2:1-29:12
 		INJECTED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:2:11-69
@@ -53,8 +53,12 @@ uses-permission#android.permission.BLUETOOTH_ADMIN
 ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:6:5-74
 	android:name
 		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:6:22-71
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:7:5-81
+	android:name
+		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:7:22-78
 application
-ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:8:5-25:19
+ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:9:5-27:19
 MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\jtint\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\855f06cfe2d512b067f8379992b68d38\AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\jtint\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\855f06cfe2d512b067f8379992b68d38\AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\jtint\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\c2fba051b1c0c2784d53d1c8d2bd36de\AndroidManifest.xml:9:5-20
@@ -104,37 +108,39 @@ MERGED from [com.google.android.gms:play-services-tasks-license:12.0.1] C:\Users
 MERGED from [com.google.firebase:firebase-iid-license:12.0.1] C:\Users\jtint\.gradle\caches\transforms-1\files-1.1\firebase-iid-license-12.0.1.aar\024754ca129100715086d4f4d9a16062\AndroidManifest.xml:22:5-20
 MERGED from [com.google.firebase:firebase-iid-license:12.0.1] C:\Users\jtint\.gradle\caches\transforms-1\files-1.1\firebase-iid-license-12.0.1.aar\024754ca129100715086d4f4d9a16062\AndroidManifest.xml:22:5-20
 	android:supportsRtl
-		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:13:9-35
+		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:14:9-35
 	android:label
-		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:11:9-41
+		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:12:9-41
 	android:roundIcon
-		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:12:9-54
+		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:13:9-54
 	android:icon
-		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:10:9-43
+		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:11:9-43
 	android:allowBackup
-		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:9:9-35
+		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:10:9-35
 	android:theme
-		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:14:9-40
+		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:15:9-40
 activity#com.concepttech.campingcompanionbluetooth.Main
-ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:15:9-23:20
+ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:16:9-25:20
 	android:screenOrientation
-		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:16:13-49
+		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:17:13-49
+	android:theme
+		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:18:13-44
 	android:name
-		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:15:19-39
+		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:16:19-39
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:18:13-22:29
+ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:20:13-24:29
 action#android.intent.action.MAIN
-ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:19:17-69
+ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:21:17-69
 	android:name
-		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:19:25-66
+		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:21:25-66
 category#android.intent.category.LAUNCHER
-ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:21:17-77
+ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:23:17-77
 	android:name
-		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:21:27-74
+		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:23:27-74
 activity#com.concepttech.campingcompanionbluetooth.DeviceListActivity
-ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:24:9-65
+ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:26:9-65
 	android:name
-		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:24:19-53
+		ADDED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml:26:19-53
 uses-sdk
 INJECTED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\jtint\AndroidProjects\CampingCompanion\app\src\main\AndroidManifest.xml
