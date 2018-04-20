@@ -1,7 +1,7 @@
-#Sat Apr 14 15:17:40 CDT 2018
-base.0=D\:\\jtint\\AndroidProjects\\CampingCompanion\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\13
+#Mon Apr 16 15:43:35 CDT 2018
+base.0=/Users/yang/Desktop/github/CampingCompanion/app/build/intermediates/transforms/dexMerger/debug/13
 path.1=classes.dex
 renamed.1=classes2.dex
 path.0=classes.dex
 renamed.0=classes.dex
-base.1=D\:\\jtint\\AndroidProjects\\CampingCompanion\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\12
+base.1=/Users/yang/Desktop/github/CampingCompanion/app/build/intermediates/transforms/dexMerger/debug/12

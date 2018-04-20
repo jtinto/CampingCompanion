@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\jtint\\AndroidProjects\\CampingCompanion\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
+            "outputFile": "/Users/yang/Desktop/github/CampingCompanion/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\jtint\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\6d2b00635dda44c4d39dfc7ebd79c71c\\res\\values-v16\\values-v16.xml",
+                    "source": "/Users/yang/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/e43a3fd5906f20e4c4e26c1f8b8089ac/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\jtint\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\855f06cfe2d512b067f8379992b68d38\\res\\values-v16\\values-v16.xml",
+                    "source": "/Users/yang/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/4a9088523a4d15ca6d85b72b995e3e18/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

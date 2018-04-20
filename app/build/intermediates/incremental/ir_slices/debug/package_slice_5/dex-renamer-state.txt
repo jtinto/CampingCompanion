@@ -1,0 +1,4 @@
+#Sun Apr 15 23:40:39 CDT 2018
+base.0=/Users/yang/Desktop/github/CampingCompanion/app/build/intermediates/transforms/dexMerger/debug/6
+path.0=classes.dex
+renamed.0=classes.dex
