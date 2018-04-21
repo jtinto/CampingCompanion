@@ -32,6 +32,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -108,11 +109,16 @@ public class Main extends FragmentActivity implements BluetoothController.OnFrag
     public void ConnectionFragmentCallback(boolean ResultOk, BluetoothDevice device){
         BluetoothDeviceFound = ResultOk;
         if(ResultOk){
-            IntentFilter intentFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-            intentFilter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
-            context.registerReceiver(myReceiver, intentFilter);
-            device.createBond();
-            DeviceMAC = device.getAddress();
+            try {
+                while (device.getBondState() != 12) {
+                    Method m = device.getClass().getMethod("createBond", (Class[]) null);
+                    m.invoke(device, (Object[]) null);
+                }
+            }catch (Exception e) {
+                Log.e("pairDevice()", e.getMessage());
+            }
+            Connect(device.getAddress());
+            LaunchHomeFragment();
         }
     }
     @Override
