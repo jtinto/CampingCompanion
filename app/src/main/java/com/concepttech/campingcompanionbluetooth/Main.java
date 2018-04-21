@@ -14,7 +14,6 @@ import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Xml;
@@ -53,21 +52,26 @@ public class Main extends FragmentActivity implements BluetoothController.OnFrag
                                             ConnectionFragment.ConnectionFragmentCallback,
                                             HomeFragment.HomeCallback,
                                             LightsFragment.LightsFragmentCallback,
-                                            InitialSetUpFragment.InitialSetUpCallback{
+                                            InitialSetUpFragment.InitialSetUpCallback,
+                                            LocationFragment.MapFragmentCallBack{
 
     private DeviceState deviceState;
     private CustomBlueToothAdapter Bluetoothadapter;
 
-    // Intent request codes
-    private static final int REQUEST_CONNECT_DEVICE_SECURE = 1;
-    private static final int REQUEST_CONNECT_DEVICE_INSECURE = 2;
     private static final int REQUEST_ENABLE_BT = 3;
     private boolean RTR1 = false , RTR2 = false, messagetypevalid = false , ResReq = false, BluetoothDeviceFound,StatusGood = false, InitialSetUpDone = false;
     private String mConnectedDeviceName = null, TAG = "MainActivity", DeviceMAC;
     private CustomBlueToothAdapter mCustomBluetoothAdapter = null;
     private BluetoothAdapter mBluetoothAdapter = null;
     private Context context;
+    private LightsFragment lightsFragment;
+    private HomeFragment Homefragment;
+    private ConnectionFragment Connectionfragment;
+    private LocationFragment Locationfragment;
     public void onFragmentInteraction(Uri uri){
+
+    }
+    public void MapFragmentCallBack(){
 
     }
     public void InitialSetUpCallback(){
@@ -82,13 +86,16 @@ public class Main extends FragmentActivity implements BluetoothController.OnFrag
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             switch (request) {
                 case HomeFragmentLaunchLights:
-                    LightsFragment lightsFragment = new LightsFragment();
+                    if(lightsFragment == null) lightsFragment = new LightsFragment();
                     transaction.replace(R.id.fragment_holder, lightsFragment);
                     transaction.commit();
                     break;
                 case HomeFragmentLaunchStatus:
                     break;
                 case HomeFragmentLaunchLocation:
+                    if(Locationfragment == null) Locationfragment = new LocationFragment();
+                    transaction.replace(R.id.fragment_holder, Locationfragment);
+                    transaction.commit();
                     break;
                 case HomeFragmentLaunchLog:
                     break;
@@ -123,15 +130,15 @@ public class Main extends FragmentActivity implements BluetoothController.OnFrag
     }
     private void LaunchHomeFragment(){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        HomeFragment fragment = new HomeFragment();
-        fragment.SetParameters(deviceState);
-        transaction.replace(R.id.fragment_holder, fragment);
+        if(Homefragment == null) Homefragment = new HomeFragment();
+        Homefragment.SetParameters(deviceState);
+        transaction.replace(R.id.fragment_holder, Homefragment);
         transaction.commit();
     }
     private void LaunchConnectionFragment(){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        ConnectionFragment fragment = new ConnectionFragment();
-        transaction.replace(R.id.fragment_holder, fragment);
+        if(Connectionfragment == null) Connectionfragment = new ConnectionFragment();
+        transaction.replace(R.id.fragment_holder, Connectionfragment);
         transaction.commit();
     }
     private void Initialize(){
