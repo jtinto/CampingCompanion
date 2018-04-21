@@ -110,12 +110,12 @@ public class Main extends FragmentActivity implements BluetoothController.OnFrag
         BluetoothDeviceFound = ResultOk;
         if(ResultOk){
             try {
-                while (device.getBondState() != 12) {
                     Method m = device.getClass().getMethod("createBond", (Class[]) null);
                     m.invoke(device, (Object[]) null);
-                }
             }catch (Exception e) {
                 Log.e("pairDevice()", e.getMessage());
+            }
+            while (device.getBondState() != 12) {
             }
             Connect(device.getAddress());
             LaunchHomeFragment();
