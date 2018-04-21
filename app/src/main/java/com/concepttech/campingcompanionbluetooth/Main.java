@@ -3,8 +3,10 @@ package com.concepttech.campingcompanionbluetooth;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Handler;
@@ -37,6 +39,7 @@ import java.util.Set;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import static android.bluetooth.BluetoothDevice.ACTION_BOND_STATE_CHANGED;
 import static com.concepttech.campingcompanionbluetooth.Constants.DeviceName;
 import static com.concepttech.campingcompanionbluetooth.Constants.HomeFragmentLaunchConnection;
 import static com.concepttech.campingcompanionbluetooth.Constants.HomeFragmentLaunchLights;
@@ -98,9 +101,11 @@ public class Main extends FragmentActivity implements BluetoothController.OnFrag
     public void ConnectionFragmentCallback(boolean ResultOk, BluetoothDevice device){
         BluetoothDeviceFound = ResultOk;
         if(ResultOk){
-            mBluetoothAdapter.getBondedDevices().add(device);
-            Connect(device.getAddress());
-            LaunchHomeFragment();
+            IntentFilter intentFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+            intentFilter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
+            context.registerReceiver(myReceiver, intentFilter);
+            device.createBond();
+            DeviceMAC = device.getAddress();
         }
     }
     @Override
@@ -221,8 +226,22 @@ public class Main extends FragmentActivity implements BluetoothController.OnFrag
                             Toast.LENGTH_SHORT).show();
                     finish();
                 }
+                break;
         }
     }
+    private BroadcastReceiver myReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals(action)) {
+                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                if (device.getBondState() == BluetoothDevice.BOND_BONDED) {
+                    Connect(DeviceMAC);
+                }else Toast.makeText(Main.this,"Device did not bond", Toast.LENGTH_LONG).show();
+                    LaunchHomeFragment();
+                }
+        }
+    };
     private void ensureDiscoverable() {
         if (mBluetoothAdapter.getScanMode() !=
                 BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
