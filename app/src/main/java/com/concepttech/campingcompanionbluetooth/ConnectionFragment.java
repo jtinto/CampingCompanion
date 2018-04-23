@@ -187,7 +187,10 @@ public class ConnectionFragment extends Fragment implements View.OnClickListener
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 // If it's already paired, skip it, because it's been listed already
                 if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
-                    mNewDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+                    String name = "";
+                    if(device.getName() == null) name = "Unknown";
+                    else name = device.getName();
+                    mNewDevicesArrayAdapter.add(name + "\n" + device.getAddress());
                     mDevicesArray.add(device);
                 }
                 // When discovery is finished, change the Activity title
@@ -201,6 +204,9 @@ public class ConnectionFragment extends Fragment implements View.OnClickListener
             }
         }
     };
+    public void Cleanup(){
+        if(getContext() != null) getContext().unregisterReceiver(mReceiver);
+    }
     public interface ConnectionFragmentCallback {
         // TODO: Update argument type and name
         void ConnectionFragmentCallback(boolean ResultOk, BluetoothDevice device);

@@ -1,11 +1,11 @@
 #Internal package file, do not edit.
-#Sat Apr 21 14:09:00 CDT 2018
-1.base=D\:\\jtint\\AndroidProjects\\CampingCompanion\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+#Mon Apr 23 16:13:39 CDT 2018
+1.base=D\:\\jtint\\AndroidProjects\\CampingCompanion\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\13
 0.baseType=DIRECTORY
 1.baseType=DIRECTORY
 count=2
 1.set=DEX
-0.path=classes2.dex
+0.path=classes.dex
 0.set=DEX
-0.base=D\:\\jtint\\AndroidProjects\\CampingCompanion\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+0.base=D\:\\jtint\\AndroidProjects\\CampingCompanion\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\12
 1.path=classes.dex

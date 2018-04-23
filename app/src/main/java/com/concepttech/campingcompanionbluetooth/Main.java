@@ -21,6 +21,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.google.android.gms.nearby.messages.internal.Update;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -32,8 +34,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -46,56 +51,84 @@ import static com.concepttech.campingcompanionbluetooth.Constants.HomeFragmentLa
 import static com.concepttech.campingcompanionbluetooth.Constants.HomeFragmentLaunchLog;
 import static com.concepttech.campingcompanionbluetooth.Constants.HomeFragmentLaunchStatus;
 import static com.concepttech.campingcompanionbluetooth.Constants.LabelIndex;
+import static com.concepttech.campingcompanionbluetooth.Constants.LightsFragmentBack;
+import static com.concepttech.campingcompanionbluetooth.Constants.LightsFragmentChangeColor;
 import static com.concepttech.campingcompanionbluetooth.Constants.isValidLabel;
 
-public class Main extends FragmentActivity implements BluetoothController.OnFragmentInteractionListener,
-                                            ConnectionFragment.ConnectionFragmentCallback,
+public class Main extends FragmentActivity implements ConnectionFragment.ConnectionFragmentCallback,
                                             HomeFragment.HomeCallback,
                                             LightsFragment.LightsFragmentCallback,
                                             InitialSetUpFragment.InitialSetUpCallback,
-                                            LocationFragment.MapFragmentCallBack{
+                                            LocationFragment.MapFragmentCallBack,
+                                            StatusFragment.StatusFragmentCallback{
 
     private DeviceState deviceState;
-    private CustomBlueToothAdapter Bluetoothadapter;
-
+    int timeout =0;
     private static final int REQUEST_ENABLE_BT = 3;
-    private boolean RTR1 = false , RTR2 = false, messagetypevalid = false , ResReq = false, BluetoothDeviceFound,StatusGood = false, InitialSetUpDone = false;
+    private boolean RTR1 = false , RTR2 = false, messagetypevalid = false , ResReq = false, BluetoothDeviceFound,StatusGood = false, InitialSetUpDone = false,
+    LocationLoaded = false, StatusLoaded = false;
     private String mConnectedDeviceName = null, TAG = "MainActivity", DeviceMAC;
     private CustomBlueToothAdapter mCustomBluetoothAdapter = null;
     private BluetoothAdapter mBluetoothAdapter = null;
     private Context context;
-    private LightsFragment lightsFragment;
+    private Timer timer;
+    private LightsFragment Lightsfragment;
     private HomeFragment Homefragment;
     private ConnectionFragment Connectionfragment;
     private LocationFragment Locationfragment;
-    public void onFragmentInteraction(Uri uri){
-
+    private StatusFragment Statusfragment;
+    public void StatusFragmentCallback(){
+        StatusLoaded = false;
+        CancelTimer();
+        LaunchHomeFragment();
     }
     public void MapFragmentCallBack(){
-
+        LocationLoaded = false;
+        CancelTimer();
+        LaunchHomeFragment();
     }
     public void InitialSetUpCallback(){
         InitialSetUpDone = true;
         LaunchConnectionFragment();
     }
-    public void LightsFragmentCallback(String request){
-
+    public void LightsFragmentCallback(String request, DeviceState state){
+        if(request != null && deviceState != null){
+            deviceState = state;
+            switch (request){
+                case LightsFragmentChangeColor:
+                    SendLightCommand();
+                    break;
+                case LightsFragmentBack:
+                    LaunchHomeFragment();
+                    break;
+            }
+        }
     }
     public void HomeCallback(String request){
         if(request != null && request.length() > 0) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             switch (request) {
                 case HomeFragmentLaunchLights:
-                    if(lightsFragment == null) lightsFragment = new LightsFragment();
-                    transaction.replace(R.id.fragment_holder, lightsFragment);
+                    if(Lightsfragment == null) Lightsfragment = new LightsFragment();
+                    Lightsfragment.SetState(deviceState, context);
+                    transaction.replace(R.id.fragment_holder, Lightsfragment);
                     transaction.commit();
                     break;
                 case HomeFragmentLaunchStatus:
+                    StatusLoaded = true;
+                    if(Statusfragment == null) Statusfragment = new StatusFragment();
+                    Statusfragment.SetDeviceState(deviceState);
+                    transaction.replace(R.id.fragment_holder, Statusfragment);
+                    transaction.commit();
+                    StartTimer();
                     break;
                 case HomeFragmentLaunchLocation:
+                    LocationLoaded = true;
                     if(Locationfragment == null) Locationfragment = new LocationFragment();
+                    Locationfragment.SetDeviceState(deviceState);
                     transaction.replace(R.id.fragment_holder, Locationfragment);
                     transaction.commit();
+                    StartTimer();
                     break;
                 case HomeFragmentLaunchLog:
                     break;
@@ -105,14 +138,47 @@ public class Main extends FragmentActivity implements BluetoothController.OnFrag
             }
         }
     }
-    public void ConnectionFragmentCallback(boolean ResultOk, BluetoothDevice device){
+    public void ConnectionFragmentCallback(boolean ResultOk, final BluetoothDevice device){
         BluetoothDeviceFound = ResultOk;
         if(ResultOk){
-            IntentFilter intentFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-            intentFilter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
-            context.registerReceiver(myReceiver, intentFilter);
-            device.createBond();
-            DeviceMAC = device.getAddress();
+            try {
+                Method m = device.getClass().getMethod("createBond", (Class[]) null);
+                m.invoke(device, (Object[]) null);
+                DeviceMAC = device.getAddress();
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        if(timeout < 10){
+                            if(device.getBondState() == BluetoothDevice.BOND_BONDED && timeout > 5){
+                                Log.d(TAG,"about to connect ");
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Connect(DeviceMAC);
+                                        LaunchHomeFragment();
+                                    }
+                                });
+                                timeout = 0;
+                                this.cancel();
+                            }
+                        }else{
+                            timeout = 0;
+                            Log.d(TAG,"Timeout");
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(Main.this, "Connection Failed", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                            this.cancel();
+                        }
+                        timeout++;
+                        Log.d(TAG,"Timer run: " + timeout);
+                    }
+                }, 1000,1000);
+            }catch (Exception e) {
+                Log.e("pairDevice()", e.getMessage());
+            }
         }
     }
     @Override
@@ -120,13 +186,18 @@ public class Main extends FragmentActivity implements BluetoothController.OnFrag
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = getApplicationContext();
-        if (savedInstanceState == null && context != null) {
+        if (context != null) {
             Initialize();
         }
     }
     @Override
     public void onDestroy(){
         super.onDestroy();
+        if (mCustomBluetoothAdapter != null) {
+            mCustomBluetoothAdapter.stop();
+        }
+        if(Connectionfragment != null) Connectionfragment.Cleanup();
+        CancelTimer();
     }
     private void LaunchHomeFragment(){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -190,8 +261,7 @@ public class Main extends FragmentActivity implements BluetoothController.OnFrag
         }
         return true;
     }
-    private boolean checkAccessCoarseLocationPermission()
-    {
+    private boolean checkAccessCoarseLocationPermission(){
         String permission = android.Manifest.permission.ACCESS_COARSE_LOCATION;
         int res = checkCallingOrSelfPermission(permission);
         return (res == PackageManager.PERMISSION_GRANTED);
@@ -203,6 +273,28 @@ public class Main extends FragmentActivity implements BluetoothController.OnFrag
             // Attempt to connect to the device
             mCustomBluetoothAdapter.connect(device, false);
             if (deviceState == null) deviceState = new DeviceState();
+        }
+    }
+    private void UpdateFragmentState(){
+        if(LocationLoaded) Locationfragment.SetDeviceState(deviceState);
+        else if(StatusLoaded) Statusfragment.SetDeviceState(deviceState);
+    }
+    private void StartTimer(){
+        if(timer == null) {
+            timer = new Timer();
+            timer.schedule( new TimerTask() {
+                @Override
+                public void run() {
+                    RequestData();
+                }
+            }, 0, 5000);
+        }
+    }
+    private void CancelTimer(){
+        if(timer != null){
+            timer.cancel();
+            timer.purge();
+            timer = null;
         }
     }
     private void SetUpBluetoothAdapter(){
@@ -217,38 +309,6 @@ public class Main extends FragmentActivity implements BluetoothController.OnFrag
     }
     private void UpdateValues(){
     }
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case REQUEST_ENABLE_BT:
-                Log.d(TAG,"REQUEST_ENABLE_BT");
-                // When the request to enable Bluetooth returns
-                if (resultCode == Activity.RESULT_OK) {
-                    Log.d(TAG,"RESULT_OK");
-                    // Bluetooth is now enabled, so set up a chat session
-                    Initialize();
-                } else {
-                    // User did not enable Bluetooth or an error occurred
-                    Log.d(TAG, "BT not enabled");
-                    Toast.makeText(Main.this, R.string.bt_not_enabled_leaving,
-                            Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-                break;
-        }
-    }
-    private BroadcastReceiver myReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals(action)) {
-                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                if (device.getBondState() == BluetoothDevice.BOND_BONDED) {
-                    Connect(DeviceMAC);
-                }else Toast.makeText(Main.this,"Device did not bond", Toast.LENGTH_LONG).show();
-                    LaunchHomeFragment();
-                }
-        }
-    };
     private void ensureDiscoverable() {
         if (mBluetoothAdapter.getScanMode() !=
                 BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
@@ -472,7 +532,7 @@ public class Main extends FragmentActivity implements BluetoothController.OnFrag
         Write(command);
         //TODO: pass command to write function after checking validity
     }
-    private void RequestGeoData(){
+    private void RequestData(){
         String command = BuildHeader(Constants.MESSAGE_READ, 1) + BuildBody(Constants.LIGHTCOMMANDLABELS);
         Log.d(TAG, command);
         Write(command);
@@ -769,6 +829,25 @@ public class Main extends FragmentActivity implements BluetoothController.OnFrag
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_ENABLE_BT:
+                Log.d(TAG,"REQUEST_ENABLE_BT");
+                // When the request to enable Bluetooth returns
+                if (resultCode == Activity.RESULT_OK) {
+                    Log.d(TAG,"RESULT_OK");
+                    // Bluetooth is now enabled, so set up a chat session
+                    Initialize();
+                } else {
+                    // User did not enable Bluetooth or an error occurred
+                    Log.d(TAG, "BT not enabled");
+                    Toast.makeText(Main.this, R.string.bt_not_enabled_leaving,
+                            Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                break;
+        }
+    }
     private final Handler mHandler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -798,6 +877,7 @@ public class Main extends FragmentActivity implements BluetoothController.OnFrag
                     // construct a string from the valid bytes in the buffer
                     String readMessage = new String(readBuf, 0, msg.arg1);
                     HandleRecievedMessage(readMessage);
+                    if(StatusLoaded || LocationLoaded) UpdateFragmentState();
                     break;
                 case Constants.MESSAGE_DEVICE_NAME:
                     // save the connected device's name

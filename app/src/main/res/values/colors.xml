@@ -4,6 +4,16 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="HomeButtonColor">#bdc3e0dd</color>
+    <color name="SelectedButtonColor">#bd38eddb</color>
+    <color name="Red">#ff0000</color>
+    <color name="Green">#00ff00</color>
+    <color name="Blue">#0000ff</color>
+    <color name="Yellow">#ffd500</color>
+    <color name="Orange">#ff7b00</color>
+    <color name="Pink">#ff00c8</color>
+    <color name="Cyan">#00ffff</color>
+    <color name="Purple">#7700ff</color>
     <color name="White">#ffffff</color>
+    <color name="WhiteTranslucent">#4cffffff</color>
 
 </resources>

@@ -98,11 +98,11 @@ public class BluetoothController extends Fragment implements SeekBar.OnSeekBarCh
     public void onClick(View view){
         switch (view.getId()){
             case R.id.sendTurnlightOncommandbutton:
-                CurrentState.TurnLightOn(new int[]{0});
+                //CurrentState.TurnLightOn(new int[]{0});
                 SendLightCommand();
                 break;
             case R.id.sendTurnlightOffcommandbutton:
-                CurrentState.TurnLightOff(new int[]{0});
+                //CurrentState.TurnLightOff(new int[]{0});
                 SendLightCommand();
                 break;
             case R.id.TestUpdateStringButton:
@@ -151,7 +151,7 @@ public class BluetoothController extends Fragment implements SeekBar.OnSeekBarCh
         Log.d(TAG,"redseekprogress: " + redprogress);
         Log.d(TAG,"greenseekprogress: " + greenprogress);
         Log.d(TAG,"blueseekprogress: " + blueprogress);
-        CurrentState.setLightcolors(0,redprogress,greenprogress,blueprogress);
+        //CurrentState.setLightcolors(0,redprogress,greenprogress,blueprogress);
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {

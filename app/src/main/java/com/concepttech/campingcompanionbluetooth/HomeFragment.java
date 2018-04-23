@@ -108,11 +108,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         LocationButton = ThisView.findViewById(R.id.HomeFragmentLocationButton);
         CaptainsLogButton = ThisView.findViewById(R.id.HomeFragmentLogButton);
         ConnectionButton = ThisView.findViewById(R.id.HomeFragmentConnnectButton);
+        LightsButton = ThisView.findViewById(R.id.HomeFragmentLightsButton);
         ConnectionButton.setOnClickListener(this);
         StatusButton.setOnClickListener(this);
         LocationButton.setOnClickListener(this);
         CaptainsLogButton.setOnClickListener(this);
-        ConnectionButton.setOnClickListener(this);
+        LightsButton.setOnClickListener(this);
     }
     @Override
     public void onAttach(Context context) {

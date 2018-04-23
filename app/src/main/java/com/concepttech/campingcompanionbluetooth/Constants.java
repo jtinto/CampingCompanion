@@ -17,13 +17,14 @@ public class Constants {
             NOCOLERR = "Message did not contain any colons",
             MESSTOPOSTEMPTY = "Message to post to log was length 0, no resend requested",
             MESSTOPOSTNULL = "Message to post to log was null, no resend requested",
-            FALSE = "false", TRUE = "true", DEVICE_NAME = "device_name", TOAST = "toast", LIGHTSTATUS = "LIGHTSTATUS", LIGHTCOLORS ="LIGHTCOLORS",
+            FALSE = "false", TRUE = "true", DEVICE_NAME = "device_name", TOAST = "toast", LIGHTSTATUS = "LIGHTSTATUS", LIGHTCOLORS ="LIGHTCOLORS", THEATERCOMMAND = "theater",
             HomeFragmentLaunchLights = "Home:Lights",HomeFragmentLaunchStatus = "Home:Status",HomeFragmentLaunchLocation = "Home:Location",HomeFragmentLaunchLog = "Home:Log",
-            HomeFragmentLaunchConnection = "Home:Connection",
-            DeviceName = "PEBL", ScanningText = "Scanning...", ScanText = "Scan";
+            HomeFragmentLaunchConnection = "Home:Connection",LightsFragmentChangeColor = "Lights:ColorCommand",LightsFragmentBack = "Lights:Home",LocationragmentBack = "Location:Home",
+            DeviceName = "PEBL", ScanningText = "Scanning...", ScanText = "Scan", LightStatusOn = "static", LightStatusOff = "off";
 
     public static final int MESSAGE_STATE_CHANGE = 1,
             MAXCOLORCODES = 3,
+            MaxColorPrograms = 4,
             MAXCOLORCODEVALUE = 256,
             MESSAGE_READ = 2,
             MESSAGE_WRITE = 3,

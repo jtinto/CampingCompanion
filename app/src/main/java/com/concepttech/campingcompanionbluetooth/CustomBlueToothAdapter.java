@@ -83,6 +83,9 @@ public final class CustomBlueToothAdapter {
     public synchronized int getState() {
         return mState;
     }
+    public synchronized void Disconnect() {
+        mAdapter.disable();
+    }
 
     /**
      * Start the chat service. Specifically start AcceptThread to begin a

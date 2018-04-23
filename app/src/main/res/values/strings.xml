@@ -21,4 +21,25 @@
     <string name="StartText">Start Here</string>
     <!-- String for connections activity-->
     <string name="ConnectionHeader">The available devices are shown\nbelow, please select your\nPEBL below</string>
+    <!-- String for lights activity-->
+    <string name="BlueText">Blue</string>
+    <string name="RedText">Red</string>
+    <string name="GreenText">Green</string>
+    <string name="TurnLightsOffText">Turn Off</string>
+    <string name="SelectedColorText">Selected Color</string>
+    <string name="ManualColorText">Manual Color</string>
+    <string name="PreMadeColorText">Pre-made Colors</string>
+    <string name="Pattern1Text">Pattern 1</string>
+    <string name="Pattern2Text">Pattern 2</string>
+    <string name="Pattern3Text">Pattern 3</string>
+    <!-- Status Strings-->
+    <string name="TempText">Temp:</string>
+    <string name="BaroPressureText">Barometric Pressure:</string>
+    <string name="HumidityyText">Humidity:</string>
+
+    <!-- General Strings-->
+    <string name="NotSetText">Not Set</string>
+    <string name="BackText">Back</string>
+    <string name="SaveText">Save</string>
+    <string name="SetText">Set</string>
 </resources>
