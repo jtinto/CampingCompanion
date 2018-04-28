@@ -10,96 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f5bc8f7-2485-4b75-b325-cce6e0bbf522" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/blurredbackground.png" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/compat/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/compat/R.java" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/constraint/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/constraint/R.java" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/coreui/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/coreui/R.java" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/coreutils/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/coreutils/R.java" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/fragment/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/fragment/R.java" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/graphics/drawable/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/graphics/drawable/R.java" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/graphics/drawable/animated/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/graphics/drawable/animated/R.java" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/mediacompat/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/mediacompat/R.java" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v4/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v4/R.java" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/concepttech/campingcompanionbluetooth/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/concepttech/campingcompanionbluetooth/R.java" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/google/android/gms/R.java" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/debug.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/debug.json" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/values.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi-v2/values.json" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/debug.json" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/compat/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/compat/R$drawable.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/compat/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/compat/R$id.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/compat/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/compat/R$string.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/constraint/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/constraint/R$id.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreui/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreui/R$drawable.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreui/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreui/R$id.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreui/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreui/R$string.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreutils/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreutils/R$drawable.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreutils/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreutils/R$id.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreutils/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/coreutils/R$string.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/fragment/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/fragment/R$drawable.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/fragment/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/fragment/R$id.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/fragment/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/fragment/R$string.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/graphics/drawable/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/graphics/drawable/R$drawable.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/graphics/drawable/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/graphics/drawable/R$id.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/graphics/drawable/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/graphics/drawable/R$string.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/graphics/drawable/animated/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/graphics/drawable/animated/R$drawable.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/graphics/drawable/animated/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/graphics/drawable/animated/R$id.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/graphics/drawable/animated/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/graphics/drawable/animated/R$string.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/mediacompat/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/mediacompat/R$drawable.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/mediacompat/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/mediacompat/R$id.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/mediacompat/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/mediacompat/R$string.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v4/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v4/R$drawable.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v4/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v4/R$id.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v4/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v4/R$string.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$drawable.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$id.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$string.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/BluetoothController.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/BluetoothController.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/ConnectionFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/ConnectionFragment$2.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/ConnectionFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/ConnectionFragment.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/Constants.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/Constants.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/DeviceListActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/DeviceListActivity$3.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/DeviceListActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/DeviceListActivity.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/DeviceState.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/DeviceState.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/HomeFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/HomeFragment.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/InitialSetUpFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/InitialSetUpFragment.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/LightsFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/LightsFragment.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/Main$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/Main$1.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/Main.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/Main.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/R$drawable.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/R$id.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/R$integer.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/R$integer.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/R$layout.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/R$mipmap.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/R$mipmap.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/R$string.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/R$style.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/R$style.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/R$styleable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/concepttech/campingcompanionbluetooth/R$styleable.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/R$id.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/google/android/gms/R$string.class" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/resources-debug.ap_" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout_fragment_lights.xml.flat" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout_fragment_lights.xml.flat" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values_values.arsc.flat" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values_values.arsc.flat" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/__content__.json" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/__content__.json" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/__content__.json" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexMerger/debug/__content__.json" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/concepttech/campingcompanionbluetooth/Constants.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/concepttech/campingcompanionbluetooth/Constants.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/concepttech/campingcompanionbluetooth/DeviceState.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/concepttech/campingcompanionbluetooth/DeviceState.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/concepttech/campingcompanionbluetooth/LightsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/concepttech/campingcompanionbluetooth/LightsFragment.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/concepttech/campingcompanionbluetooth/Main.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/concepttech/campingcompanionbluetooth/Main.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_lights.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_lights.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -209,8 +121,8 @@
       <file leaf-file-name="LightsFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/concepttech/campingcompanionbluetooth/LightsFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5387">
-              <caret line="393" column="20" lean-forward="false" selection-start-line="393" selection-start-column="20" selection-end-line="393" selection-end-column="20" />
+            <state relative-caret-position="4590">
+              <caret line="294" column="38" lean-forward="true" selection-start-line="294" selection-start-column="38" selection-end-line="294" selection-end-column="38" />
               <folding>
                 <element signature="e#14503#15352#0" expanded="true" />
                 <element signature="e#14658#15318#0" expanded="true" />
@@ -304,8 +216,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1034">
-              <caret line="183" column="18" lean-forward="false" selection-start-line="183" selection-start-column="18" selection-end-line="183" selection-end-column="18" />
+            <state relative-caret-position="-2292">
+              <caret line="109" column="60" lean-forward="false" selection-start-line="109" selection-start-column="33" selection-end-line="109" selection-end-column="60" />
               <folding>
                 <element signature="e#9916#9942#0" expanded="true" />
                 <element signature="e#10262#10280#0" expanded="true" />
@@ -2717,7 +2629,14 @@
       <option name="project" value="LOCAL" />
       <updated>1524527588674</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Light Activity changes and fixes">
+      <created>1524955822451</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1524955822453</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2772,7 +2691,8 @@
     <MESSAGE value="added location fragement and code" />
     <MESSAGE value="Status fragment, lights fragment completion, fixed pairing process, location fragment code implemented" />
     <MESSAGE value="adding files removed from last commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding files removed from last commit" />
+    <MESSAGE value="Light Activity changes and fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Light Activity changes and fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3248,8 +3168,8 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1034">
-          <caret line="183" column="18" lean-forward="false" selection-start-line="183" selection-start-column="18" selection-end-line="183" selection-end-column="18" />
+        <state relative-caret-position="-2292">
+          <caret line="109" column="60" lean-forward="false" selection-start-line="109" selection-start-column="33" selection-end-line="109" selection-end-column="60" />
           <folding>
             <element signature="e#9916#9942#0" expanded="true" />
             <element signature="e#10262#10280#0" expanded="true" />
@@ -3259,8 +3179,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/concepttech/campingcompanionbluetooth/LightsFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5387">
-          <caret line="393" column="20" lean-forward="false" selection-start-line="393" selection-start-column="20" selection-end-line="393" selection-end-column="20" />
+        <state relative-caret-position="4590">
+          <caret line="294" column="38" lean-forward="true" selection-start-line="294" selection-start-column="38" selection-end-line="294" selection-end-column="38" />
           <folding>
             <element signature="e#14503#15352#0" expanded="true" />
             <element signature="e#14658#15318#0" expanded="true" />
