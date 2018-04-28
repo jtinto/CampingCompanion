@@ -13,10 +13,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
 
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import static android.support.v4.content.ContextCompat.getColor;
+import static com.concepttech.campingcompanionbluetooth.Constants.LightStaticStatus;
 import static com.concepttech.campingcompanionbluetooth.Constants.LightStatusOff;
 import static com.concepttech.campingcompanionbluetooth.Constants.LightsFragmentBack;
 import static com.concepttech.campingcompanionbluetooth.Constants.LightsFragmentChangeColor;
+import static com.concepttech.campingcompanionbluetooth.Constants.Rainbow1Status;
+import static com.concepttech.campingcompanionbluetooth.Constants.Rainbow2Status;
+import static com.concepttech.campingcompanionbluetooth.Constants.TheaterStatus;
 
 
 /**
@@ -37,13 +45,17 @@ public class LightsFragment extends Fragment implements View.OnClickListener,
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private View view,LightFragmentRedSelector, LightFragmentBlueSelector, LightFragmentGreenSelector, LightFragmentCyanSelector,
-            LightFragmentPurpleSelector, LightFragmentPinkSelector, LightFragmentYellowSelector, LightFragmentOrangeSelector, PreviewView;
-    private Button TheaterButton, Rainbow1Button, Raingbow2Button, BackButton, TurnOffButton;
+    private ArrayList<View> Previews = new ArrayList<>();
+    private View view,LightFragmentRedSelector, LightFragmentBlueSelector, LightFragmentGreenSelector, LightFragmentWhiteSelector,
+            LightFragmentPurpleSelector, LightFragmentPinkSelector, LightFragmentYellowSelector, LightFragmentOrangeSelector;
+    private Button TheaterButton, Rainbow1Button, Raingbow2Button, BackButton, TurnOffButton, TurnOnButton;
     private SeekBar RedSeekBar,BlueSeekBar,GreenSeekBar;
     private LightsFragmentCallback mCallback;
     private DeviceState deviceState;
     private Context context;
+    private Timer Theater1Timer,Theater2Timer,Theater3Timer;
+    private boolean Timer1Active = false,Timer2Active = false,Timer3Active = false;
+    private int ChaseIndex, RainbowIndex = 0, LastSetColor = 0;
 
     public LightsFragment() {
         // Required empty public constructor
@@ -77,74 +89,85 @@ public class LightsFragment extends Fragment implements View.OnClickListener,
     }
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        int id = Color.argb(255,RedSeekBar.getProgress(),GreenSeekBar.getProgress(),BlueSeekBar.getProgress());
-        SetColor(id);
-        mCallback.LightsFragmentCallback(LightsFragmentChangeColor,deviceState);
+        SetStateColor(RedSeekBar.getProgress(),GreenSeekBar.getProgress(),BlueSeekBar.getProgress());
     }
     @Override
     public void onClick(View view) {
         int id;
-        if (deviceState.getLightStatusDataString().equals(LightStatusOff)) deviceState.TurnLightOn();
+        if(deviceState != null) {
+            TheaterButton.setBackground(context.getDrawable(R.drawable.peblgreenroundedcornerssemitransparent));
+            Rainbow1Button.setBackground(context.getDrawable(R.drawable.peblgreenroundedcornerssemitransparent));
+            Raingbow2Button.setBackground(context.getDrawable(R.drawable.peblgreenroundedcornerssemitransparent));
+            if (deviceState.getLightStatusDataString().equals(LightStatusOff)) deviceState.TurnLightOn();
+        }
         switch (view.getId()) {
             case R.id.LightFragmentRedSelector:
                 id = getColor(context,R.color.Red);
                 SetColor(id);
-                mCallback.LightsFragmentCallback(LightsFragmentChangeColor, deviceState);
                 break;
             case R.id.LightFragmentBlueSelector:
                 id = getColor(context,R.color.Blue);
                 SetColor(id);
-                mCallback.LightsFragmentCallback(LightsFragmentChangeColor, deviceState);
                 break;
             case R.id.LightFragmentGreenSelector:
                 id = getColor(context,R.color.Green);
                 SetColor(id);
-                mCallback.LightsFragmentCallback(LightsFragmentChangeColor, deviceState);
                 break;
-            case R.id.LightFragmentCyanSelector:
-                id = getColor(context,R.color.Cyan);
+            case R.id.LightFragmentWhiteSelector:
+                id = getColor(context,R.color.White);
                 SetColor(id);
-                mCallback.LightsFragmentCallback(LightsFragmentChangeColor, deviceState);
                 break;
             case R.id.LightFragmentOrangeSelector:
                 id = getColor(context,R.color.Orange);
                 SetColor(id);
-                mCallback.LightsFragmentCallback(LightsFragmentChangeColor, deviceState);
                 break;
             case R.id.LightFragmentPinkSelector:
                 id = getColor(context,R.color.Pink);
                 SetColor(id);
-                mCallback.LightsFragmentCallback(LightsFragmentChangeColor, deviceState);
                 break;
             case R.id.LightFragmentPurpleSelector:
                 id = getColor(context,R.color.Purple);
                 SetColor(id);
-                mCallback.LightsFragmentCallback(LightsFragmentChangeColor, deviceState);
                 break;
             case R.id.LightFragmentYellowSelector:
                 id = getColor(context,R.color.Yellow);
                 SetColor(id);
-                mCallback.LightsFragmentCallback(LightsFragmentChangeColor, deviceState);
                 break;
             case R.id.LightFragmentTheaterButton:
+                if(LastSetColor == 0) LastSetColor = getColor(context,R.color.White);
+                SetColor(LastSetColor);
                 deviceState.TurnLightsTheater(0);
-                mCallback.LightsFragmentCallback(LightsFragmentChangeColor, deviceState);
+                Theater1Start();
                 break;
             case R.id.LightFragmentRainbow1Button:
                 deviceState.TurnLightsTheater(1);
-                mCallback.LightsFragmentCallback(LightsFragmentChangeColor, deviceState);
+                Theater2Start();
                 break;
             case R.id.LightFragmentRainbow2Button:
                 deviceState.TurnLightsTheater(2);
-                mCallback.LightsFragmentCallback(LightsFragmentChangeColor, deviceState);
+                Theater3Start();
                 break;
             case R.id.TurnLightsOffButton:
+                if(Timer1Active) Theater1Stop();
+                if(Timer2Active) Theater2Stop();
+                if(Timer3Active) Theater3Stop();
                 deviceState.TurnLightOff();
                 mCallback.LightsFragmentCallback(LightsFragmentChangeColor, deviceState);
                 break;
             case R.id.LightFragmentBackButton:
                 mCallback.LightsFragmentCallback(LightsFragmentBack, deviceState);
                 break;
+            case R.id.LightFragmentTurnOnButton:
+                mCallback.LightsFragmentCallback(LightsFragmentChangeColor, deviceState);
+                break;
+        }
+        if(deviceState != null) {
+            if (deviceState.getLightStatusDataString().equals(TheaterStatus))
+                TheaterButton.setBackground(context.getDrawable(R.drawable.selectedpeblebuttonroundedcorners));
+            else if (deviceState.getLightStatusDataString().equals(Rainbow1Status))
+                Rainbow1Button.setBackground(context.getDrawable(R.drawable.selectedpeblebuttonroundedcorners));
+            else if (deviceState.getLightStatusDataString().equals(Rainbow2Status))
+                Raingbow2Button.setBackground(context.getDrawable(R.drawable.selectedpeblebuttonroundedcorners));
         }
     }
     @Override
@@ -182,33 +205,49 @@ public class LightsFragment extends Fragment implements View.OnClickListener,
         super.onDetach();
         mCallback = null;
     }
+    @Override
+    public void onDestroy(){
+        if(Timer1Active) Theater1Stop();
+        if(Timer2Active) Theater2Stop();
+        if(Timer3Active) Theater3Stop();
+        super.onDestroy();
+    }
     private void Initialize(){
         if(view != null){
             LightFragmentRedSelector = view.findViewById(R.id.LightFragmentRedSelector);
             LightFragmentBlueSelector = view.findViewById(R.id.LightFragmentBlueSelector);
             LightFragmentGreenSelector = view.findViewById(R.id.LightFragmentGreenSelector);
-            LightFragmentCyanSelector = view.findViewById(R.id.LightFragmentCyanSelector);
+            LightFragmentWhiteSelector = view.findViewById(R.id.LightFragmentWhiteSelector);
             LightFragmentPurpleSelector = view.findViewById(R.id.LightFragmentPurpleSelector);
             LightFragmentPinkSelector = view.findViewById(R.id.LightFragmentPinkSelector);
             LightFragmentYellowSelector = view.findViewById(R.id.LightFragmentYellowSelector);
             LightFragmentOrangeSelector = view.findViewById(R.id.LightFragmentOrangeSelector);
+            Previews.add(view.findViewById(R.id.ColorPreviewView1));
+            Previews.add(view.findViewById(R.id.ColorPreviewView2));
+            Previews.add(view.findViewById(R.id.ColorPreviewView3));
+            Previews.add(view.findViewById(R.id.ColorPreviewView4));
+            Previews.add(view.findViewById(R.id.ColorPreviewView5));
+            Previews.add(view.findViewById(R.id.ColorPreviewView6));
+            Previews.add(view.findViewById(R.id.ColorPreviewView7));
+            Previews.add(view.findViewById(R.id.ColorPreviewView8));
             TheaterButton = view.findViewById(R.id.LightFragmentTheaterButton);
             Rainbow1Button = view.findViewById(R.id.LightFragmentRainbow1Button);
             Raingbow2Button = view.findViewById(R.id.LightFragmentRainbow2Button);
             BackButton = view.findViewById(R.id.LightFragmentBackButton);
             TurnOffButton = view.findViewById(R.id.TurnLightsOffButton);
-            PreviewView = view.findViewById(R.id.ColorPreviewView);
+            TurnOnButton = view.findViewById(R.id.LightFragmentTurnOnButton);
             RedSeekBar = view.findViewById(R.id.LightFragmentRedSeekBar);
             GreenSeekBar = view.findViewById(R.id.LightFragmentGreenSeekBar);
             BlueSeekBar = view.findViewById(R.id.LightFragmentBlueSeekBar);
             LightFragmentRedSelector.setOnClickListener(this);
             LightFragmentBlueSelector.setOnClickListener(this);
             LightFragmentGreenSelector.setOnClickListener(this);
-            LightFragmentCyanSelector.setOnClickListener(this);
+            LightFragmentWhiteSelector.setOnClickListener(this);
             LightFragmentPurpleSelector.setOnClickListener(this);
             LightFragmentPinkSelector.setOnClickListener(this);
             LightFragmentYellowSelector.setOnClickListener(this);
             LightFragmentOrangeSelector.setOnClickListener(this);
+            TurnOnButton.setOnClickListener(this);
             TheaterButton.setOnClickListener(this);
             Rainbow1Button.setOnClickListener(this);
             Raingbow2Button.setOnClickListener(this);
@@ -220,15 +259,162 @@ public class LightsFragment extends Fragment implements View.OnClickListener,
             RedSeekBar.setOnSeekBarChangeListener(this);
             GreenSeekBar.setOnSeekBarChangeListener(this);
             BlueSeekBar.setOnSeekBarChangeListener(this);
+            if(deviceState != null) {
+                if (deviceState.getLightStatusDataString().equals(LightStatusOff))
+                    TurnOffButton.setBackground(context.getDrawable(R.drawable.selectedpeblebuttonroundedcorners));
+                else if (deviceState.getLightStatusDataString().equals(TheaterStatus))
+                    TheaterButton.setBackground(context.getDrawable(R.drawable.selectedpeblebuttonroundedcorners));
+                else if (deviceState.getLightStatusDataString().equals(Rainbow1Status))
+                    Rainbow1Button.setBackground(context.getDrawable(R.drawable.selectedpeblebuttonroundedcorners));
+                else if (deviceState.getLightStatusDataString().equals(Rainbow2Status))
+                    Raingbow2Button.setBackground(context.getDrawable(R.drawable.selectedpeblebuttonroundedcorners));
+                else if (deviceState.getLightStatusDataString().equals(LightStaticStatus))
+                    TurnOnButton.setBackground(context.getDrawable(R.drawable.selectedpeblebuttonroundedcorners));
+            }
+        }
+    }
+    private int[] GetRainbow(int index){
+        if (index < 85) {
+            return new int[]{index * 3, 255 - index * 3, 0};
+        }
+        else if (index < 170) {
+            index -= 85;
+            return new int[]{255 - index * 3, 0, index * 3};
+        }
+        else {
+            index -= 170;
+            return new int[]{0, index * 3, 255 - index * 3};
         }
     }
     private void SetColor(int id){
         int red = Color.red(id), green = Color.green(id), blue = Color.blue(id);
+        RedSeekBar.setProgress(red);
+        GreenSeekBar.setProgress(green);
+        BlueSeekBar.setProgress(blue);
+        LastSetColor = id;
+        SetPreviewViewStaticColor(id);
+        SetStateColor(red,green,blue);
+    }
+    private void SetPreviewViewStaticColor(int id){
+        for (View view: Previews
+             ) {
+            view.setBackgroundColor(id);
+        }
+    }
+    private void Theater1Start(){
+        if(Timer2Active) Theater2Stop();
+        if(Timer3Active) Theater3Stop();
+        if(Theater1Timer == null) {
+            RainbowIndex = 0;
+            Theater1Timer = new Timer();
+            Timer1Active = true;
+            Theater1Timer.schedule( new TimerTask() {
+                @Override
+                public void run() {
+                    if (getActivity() != null) getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            for (int i = 0; i < Previews.size(); i += 3) {
+                                if(i + (ChaseIndex-1) < Previews.size() && i + (ChaseIndex-1) >= 0)Previews.get(i + (ChaseIndex-1)).setBackgroundColor(Color.argb(0, 0, 0, 0));
+                                if(i + ChaseIndex < Previews.size()) Previews.get(i + ChaseIndex).setBackgroundColor(LastSetColor);
+                            }
+                            ChaseIndex++;
+                            if(ChaseIndex > 3) ChaseIndex = 0;
+                        }
+                    });
+                }
+            }, 0, 50);
+        }
+    }
+    private void Theater1Stop(){
+        if(Theater1Timer != null){
+            Theater1Timer.cancel();
+            Theater1Timer = null;
+            Timer1Active = false;
+        }
+    }
+    private void Theater2Start(){
+        if(Timer1Active) Theater1Stop();
+        if(Timer3Active) Theater3Stop();
+        if(Theater2Timer == null) {
+            Theater2Timer = new Timer();
+            RainbowIndex = 0;
+            Timer2Active = true;
+            Theater2Timer.schedule( new TimerTask() {
+                @Override
+                public void run() {
+                    if(getActivity() != null) getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            for (int i = 0; i < Previews.size(); i++) {
+                                int[] colors = GetRainbow(((i * 256 / Previews.size()) + RainbowIndex) & 255);
+                                RainbowIndex++;
+                                if(RainbowIndex > 10000) RainbowIndex = 0;
+                                Previews.get(i).setBackgroundColor(Color.argb(255, colors[0], colors[1], colors[2]));
+                            }
+                        }
+                    });
+                }
+            }, 0, 50);
+        }
+    }
+    private void Theater2Stop(){
+        if(Theater2Timer != null){
+            Theater2Timer.cancel();
+            Theater2Timer = null;
+            Timer2Active = false;
+        }
+    }
+    private void Theater3Start(){
+        if(Timer1Active) Theater1Stop();
+        if(Timer2Active) Theater2Stop();
+        if(Theater3Timer == null) {
+            Theater3Timer = new Timer();
+            Timer3Active = true;
+            RainbowIndex = 0;
+            ChaseIndex = 0;
+            Theater3Timer.schedule( new TimerTask() {
+                @Override
+                public void run() {
+                    if (getActivity() != null) getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            for (int i = 0; i < Previews.size(); i += 3) {
+                                if(i + (ChaseIndex-1) < Previews.size() && i + (ChaseIndex-1) >= 0)Previews.get(i + (ChaseIndex-1)).setBackgroundColor(Color.argb(0, 0, 0, 0));
+                                int[] colors = GetRainbow((i + RainbowIndex) % 255);
+                                RainbowIndex++;
+                                if (RainbowIndex > 10000) RainbowIndex = 0;
+                                if(i + ChaseIndex < Previews.size()) Previews.get(i + ChaseIndex).setBackgroundColor(Color.argb(255, colors[0], colors[1], colors[2]));
+                            }
+                            ChaseIndex++;
+                            if(ChaseIndex > 3) ChaseIndex = 0;
+                        }
+                    });
+                }
+            }, 0, 50);
+        }
+    }
+    private void Theater3Stop(){
+        if(Theater3Timer != null){
+            Theater3Timer.cancel();
+            Theater3Timer = null;
+            Timer3Active = false;
+        }
+    }
+    private void SetStateColor(int red,int green, int blue){
+        deviceState.TurnLightOn();
         deviceState.setLightcolors(red,green,blue);
-        PreviewView.setBackgroundColor(id);
     }
     public interface LightsFragmentCallback {
         // TODO: Update argument type and name
         void LightsFragmentCallback(String request, DeviceState state);
+    }
+    private void SolidRainbowLoop(){
+        for (int i = 0; i < Previews.size(); i++) {
+            int[] colors = GetRainbow((i + RainbowIndex) & 255);
+            RainbowIndex++;
+            if(RainbowIndex > 10000) RainbowIndex = 0;
+            Previews.get(i).setBackgroundColor(Color.argb(255, colors[0], colors[1], colors[2]));
+        }
     }
 }

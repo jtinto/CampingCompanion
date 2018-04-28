@@ -26,6 +26,7 @@
     <string name="RedText">Red</string>
     <string name="GreenText">Green</string>
     <string name="TurnLightsOffText">Turn Off</string>
+    <string name="TurnLightsOnText">Turn On</string>
     <string name="SelectedColorText">Selected Color</string>
     <string name="ManualColorText">Manual Color</string>
     <string name="PreMadeColorText">Pre-made Colors</string>

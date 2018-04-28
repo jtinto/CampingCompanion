@@ -66,7 +66,7 @@ public class Main extends FragmentActivity implements ConnectionFragment.Connect
     int timeout =0;
     private static final int REQUEST_ENABLE_BT = 3;
     private boolean RTR1 = false , RTR2 = false, messagetypevalid = false , ResReq = false, BluetoothDeviceFound,StatusGood = false, InitialSetUpDone = false,
-    LocationLoaded = false, StatusLoaded = false;
+    LocationLoaded = false, StatusLoaded = false, HomeLoaded = false;
     private String mConnectedDeviceName = null, TAG = "MainActivity", DeviceMAC;
     private CustomBlueToothAdapter mCustomBluetoothAdapter = null;
     private BluetoothAdapter mBluetoothAdapter = null;
@@ -113,6 +113,7 @@ public class Main extends FragmentActivity implements ConnectionFragment.Connect
                     Lightsfragment.SetState(deviceState, context);
                     transaction.replace(R.id.fragment_holder, Lightsfragment);
                     transaction.commit();
+                    HomeLoaded = false;
                     break;
                 case HomeFragmentLaunchStatus:
                     StatusLoaded = true;
@@ -121,6 +122,7 @@ public class Main extends FragmentActivity implements ConnectionFragment.Connect
                     transaction.replace(R.id.fragment_holder, Statusfragment);
                     transaction.commit();
                     StartTimer();
+                    HomeLoaded = false;
                     break;
                 case HomeFragmentLaunchLocation:
                     LocationLoaded = true;
@@ -129,11 +131,14 @@ public class Main extends FragmentActivity implements ConnectionFragment.Connect
                     transaction.replace(R.id.fragment_holder, Locationfragment);
                     transaction.commit();
                     StartTimer();
+                    HomeLoaded = false;
                     break;
                 case HomeFragmentLaunchLog:
+                    HomeLoaded = false;
                     break;
                 case HomeFragmentLaunchConnection:
                     LaunchConnectionFragment();
+                    HomeLoaded = false;
                     break;
             }
         }
@@ -199,12 +204,18 @@ public class Main extends FragmentActivity implements ConnectionFragment.Connect
         if(Connectionfragment != null) Connectionfragment.Cleanup();
         CancelTimer();
     }
+    @Override
+    public void onBackPressed(){
+        if (!HomeLoaded) LaunchHomeFragment();
+        else finish();
+    }
     private void LaunchHomeFragment(){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if(Homefragment == null) Homefragment = new HomeFragment();
         Homefragment.SetParameters(deviceState);
         transaction.replace(R.id.fragment_holder, Homefragment);
         transaction.commit();
+        HomeLoaded = true;
     }
     private void LaunchConnectionFragment(){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

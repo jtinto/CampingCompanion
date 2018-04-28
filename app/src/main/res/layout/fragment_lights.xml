@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LightsFragment"
-    android:background="@drawable/homebackground"
+    android:background="@drawable/blurredbackground"
     android:orientation="vertical">
 
     <LinearLayout
@@ -78,6 +78,13 @@
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_weight=".125"
+                android:background="@color/White"
+                android:id="@+id/LightFragmentWhiteSelector"
+                />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight=".125"
                 android:background="@color/Red"
                 android:id="@+id/LightFragmentRedSelector"
                 />
@@ -101,13 +108,6 @@
                 android:layout_weight=".125"
                 android:background="@color/Purple"
                 android:id="@+id/LightFragmentPurpleSelector"
-                />
-            <View
-                android:layout_width="0dp"
-                android:layout_height="35dp"
-                android:layout_weight=".125"
-                android:background="@color/Cyan"
-                android:id="@+id/LightFragmentCyanSelector"
                 />
             <View
                 android:layout_width="0dp"
@@ -148,11 +148,60 @@
             android:layout_height="wrap_content"
             android:text="@string/SelectedColorText"
             android:textAlignment="center"/>
-        <View
-            android:layout_marginTop="20dp"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:id="@+id/ColorPreviewView"/>
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight=".125"
+                android:id="@+id/ColorPreviewView1"
+                />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight=".125"
+                android:id="@+id/ColorPreviewView2"
+                />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight=".125"
+                android:id="@+id/ColorPreviewView3"
+                />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight=".125"
+                android:id="@+id/ColorPreviewView4"
+                />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight=".125"
+                android:id="@+id/ColorPreviewView5"
+                />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight=".125"
+                android:id="@+id/ColorPreviewView6"
+                />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight=".125"
+                android:id="@+id/ColorPreviewView7"
+                />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight=".125"
+                android:id="@+id/ColorPreviewView8"
+                />
+
+        </LinearLayout>
 
     </LinearLayout>
     <FrameLayout
@@ -191,6 +240,13 @@
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="10dp">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/LightFragmentTurnOnButton"
+            android:layout_gravity="center"
+            android:text="@string/TurnLightsOnText"
+            android:background="@drawable/peblgreenroundedcornerssemitransparent"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

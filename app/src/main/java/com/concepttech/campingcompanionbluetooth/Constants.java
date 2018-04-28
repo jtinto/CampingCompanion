@@ -20,7 +20,8 @@ public class Constants {
             FALSE = "false", TRUE = "true", DEVICE_NAME = "device_name", TOAST = "toast", LIGHTSTATUS = "LIGHTSTATUS", LIGHTCOLORS ="LIGHTCOLORS", THEATERCOMMAND = "theater",
             HomeFragmentLaunchLights = "Home:Lights",HomeFragmentLaunchStatus = "Home:Status",HomeFragmentLaunchLocation = "Home:Location",HomeFragmentLaunchLog = "Home:Log",
             HomeFragmentLaunchConnection = "Home:Connection",LightsFragmentChangeColor = "Lights:ColorCommand",LightsFragmentBack = "Lights:Home",LocationragmentBack = "Location:Home",
-            DeviceName = "PEBL", ScanningText = "Scanning...", ScanText = "Scan", LightStatusOn = "static", LightStatusOff = "off";
+            DeviceName = "PEBL", ScanningText = "Scanning...", ScanText = "Scan", LightStatusOn = "static", LightStatusOff = "off", TheaterStatus = "theater", Rainbow1Status = "rainbow1",
+            Rainbow2Status = "rainbow2", LightStaticStatus = "static";
 
     public static final int MESSAGE_STATE_CHANGE = 1,
             MAXCOLORCODES = 3,

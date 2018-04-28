@@ -1,6 +1,10 @@
 package com.concepttech.campingcompanionbluetooth;
 
+import static com.concepttech.campingcompanionbluetooth.Constants.LightStaticStatus;
 import static com.concepttech.campingcompanionbluetooth.Constants.MaxColorPrograms;
+import static com.concepttech.campingcompanionbluetooth.Constants.Rainbow1Status;
+import static com.concepttech.campingcompanionbluetooth.Constants.Rainbow2Status;
+import static com.concepttech.campingcompanionbluetooth.Constants.TheaterStatus;
 
 public class DeviceState {
     private int batterylevel, numlights, solarpower, windpower, numnodes;
@@ -83,22 +87,22 @@ public class DeviceState {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
-    public void TurnLightOn(){lightstatus = "static";}
+    public void TurnLightOn(){lightstatus = LightStaticStatus;}
     public void TurnLightOff(){lightstatus = "off";}
     public void TurnLightsTheater(int which){
         if(which >= 0 && which <= MaxColorPrograms){
             switch (which){
                 case 0:
                     //theater
-                    lightstatus = "theater";
+                    lightstatus = TheaterStatus;
                     break;
                 case 1:
                     //rainbow1
-                    lightstatus = "rainbow1";
+                    lightstatus = Rainbow1Status;
                     break;
                 case 2:
                     //rainbow1
-                    lightstatus = "rainbow2";
+                    lightstatus = Rainbow2Status;
                     break;
             }
         }
