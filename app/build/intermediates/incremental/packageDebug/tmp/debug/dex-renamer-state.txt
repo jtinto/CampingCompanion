@@ -1,7 +1,4 @@
-#Sat Apr 28 16:27:32 CDT 2018
-base.0=D\:\\jtint\\AndroidProjects\\CampingCompanion\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\13
-path.1=classes.dex
-renamed.1=classes2.dex
+#Mon Apr 30 12:46:57 CDT 2018
+base.0=D\:\\jtint\\AndroidProjects\\CampingCompanion\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex
-base.1=D\:\\jtint\\AndroidProjects\\CampingCompanion\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\12

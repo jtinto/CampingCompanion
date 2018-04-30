@@ -1,10 +1,12 @@
 package com.concepttech.campingcompanionbluetooth;
 
+import android.annotation.SuppressLint;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -29,10 +31,14 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
     private String mParam2;
     private GoogleMap Map;
     private MapView mapView;
+    private boolean MapBeingInteractedwith = false;
+    private float startX;
+    private float startY;
     private View view;
     private DeviceState deviceState;
     private MapFragmentCallBack mListener;
     private Timer timer;
+    Button CenterButton;
 
     public LocationFragment() {
         // Required empty public constructor
@@ -52,6 +58,10 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
             case R.id.MapFragmentBackButton:
                 CancelTimer();
                 mListener.MapFragmentCallBack();
+            case R.id.MapFragmentCenterButton:
+                MapBeingInteractedwith = false;
+                CenterButton.setVisibility(View.INVISIBLE);
+                UpdateLocation();
         }
     }
     @Override
@@ -63,12 +73,15 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view  = inflater.inflate(R.layout.fragment_location, container, false);
         Button back = view.findViewById(R.id.MapFragmentBackButton);
+        back.setOnClickListener(this);
+        CenterButton = view.findViewById(R.id.MapFragmentCenterButton);
         back.setOnClickListener(this);
         mapView = view.findViewById(R.id.MapView);
         mapView.onCreate(savedInstanceState);
@@ -78,6 +91,27 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
                 Map = googleMap;
                 UpdateLocation();
                 StartTimer();
+            }
+        });
+        mapView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                MapBeingInteractedwith = true;
+                CenterButton.setVisibility(View.VISIBLE);
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        startX = motionEvent.getX();
+                        startY = motionEvent.getY();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        float endX = motionEvent.getX();
+                        float endY = motionEvent.getY();
+                        if (isAClick(startX, endX, startY, endY)) {
+                            view.performClick();
+                        }
+                        break;
+                }
+                return false;
             }
         });
         return view;
@@ -109,7 +143,7 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
                 coordinates = new LatLng(37.716226, -97.287538);
             }
             Map.addMarker(new MarkerOptions().position(coordinates));
-            Map.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 15));
+            if(!MapBeingInteractedwith) Map.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 5));
             mapView.onResume();
         }
     }
@@ -135,6 +169,12 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
             timer.purge();
             timer = null;
         }
+    }
+    private boolean isAClick(float startX, float endX, float startY, float endY) {
+        float differenceX = Math.abs(startX - endX);
+        float differenceY = Math.abs(startY - endY);
+        int CLICK_ACTION_THRESHOLD = 200;
+        return !(differenceX > CLICK_ACTION_THRESHOLD/* =5 */ || differenceY > CLICK_ACTION_THRESHOLD);
     }
     public interface MapFragmentCallBack {
         void MapFragmentCallBack();

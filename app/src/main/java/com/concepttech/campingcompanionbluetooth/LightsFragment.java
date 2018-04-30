@@ -48,7 +48,7 @@ public class LightsFragment extends Fragment implements View.OnClickListener,
     private ArrayList<View> Previews = new ArrayList<>();
     private View view,LightFragmentRedSelector, LightFragmentBlueSelector, LightFragmentGreenSelector, LightFragmentWhiteSelector,
             LightFragmentPurpleSelector, LightFragmentPinkSelector, LightFragmentYellowSelector, LightFragmentOrangeSelector;
-    private Button TheaterButton, Rainbow1Button, Raingbow2Button, BackButton, TurnOffButton, TurnOnButton;
+    private Button TheaterButton, Rainbow1Button, Raingbow2Button, BackButton, TurnOnOffButton;
     private SeekBar RedSeekBar,BlueSeekBar,GreenSeekBar;
     private LightsFragmentCallback mCallback;
     private DeviceState deviceState;
@@ -89,7 +89,7 @@ public class LightsFragment extends Fragment implements View.OnClickListener,
     }
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        SetStateColor(RedSeekBar.getProgress(),GreenSeekBar.getProgress(),BlueSeekBar.getProgress());
+        SetColorForBar(RedSeekBar.getProgress(),GreenSeekBar.getProgress(),BlueSeekBar.getProgress());
     }
     @Override
     public void onClick(View view) {
@@ -147,17 +147,22 @@ public class LightsFragment extends Fragment implements View.OnClickListener,
                 deviceState.TurnLightsTheater(2);
                 Theater3Start();
                 break;
-            case R.id.TurnLightsOffButton:
-                if(Timer1Active) Theater1Stop();
-                if(Timer2Active) Theater2Stop();
-                if(Timer3Active) Theater3Stop();
-                deviceState.TurnLightOff();
-                mCallback.LightsFragmentCallback(LightsFragmentChangeColor, deviceState);
-                break;
             case R.id.LightFragmentBackButton:
                 mCallback.LightsFragmentCallback(LightsFragmentBack, deviceState);
                 break;
-            case R.id.LightFragmentTurnOnButton:
+            case R.id.LightFragmentTurnOnOffButton:
+                if(!deviceState.getLightStatusDataString().equals("off")) {
+                    deviceState.TurnLightOff();
+                    TurnOnOffButton.setText(R.string.TurnLightsOnText);
+                }
+                else if(!deviceState.getLightStatusDataString().equals(Rainbow1Status)&&
+                        !deviceState.getLightStatusDataString().equals(Rainbow2Status)&&
+                        !deviceState.getLightStatusDataString().equals(TheaterStatus)) {
+                    deviceState.TurnLightOn();
+                    TurnOnOffButton.setText(R.string.TurnLightsOffText);
+                }else {
+                    TurnOnOffButton.setText(R.string.TurnLightsOffText);
+                }
                 mCallback.LightsFragmentCallback(LightsFragmentChangeColor, deviceState);
                 break;
         }
@@ -234,8 +239,7 @@ public class LightsFragment extends Fragment implements View.OnClickListener,
             Rainbow1Button = view.findViewById(R.id.LightFragmentRainbow1Button);
             Raingbow2Button = view.findViewById(R.id.LightFragmentRainbow2Button);
             BackButton = view.findViewById(R.id.LightFragmentBackButton);
-            TurnOffButton = view.findViewById(R.id.TurnLightsOffButton);
-            TurnOnButton = view.findViewById(R.id.LightFragmentTurnOnButton);
+            TurnOnOffButton = view.findViewById(R.id.LightFragmentTurnOnOffButton);
             RedSeekBar = view.findViewById(R.id.LightFragmentRedSeekBar);
             GreenSeekBar = view.findViewById(R.id.LightFragmentGreenSeekBar);
             BlueSeekBar = view.findViewById(R.id.LightFragmentBlueSeekBar);
@@ -247,12 +251,11 @@ public class LightsFragment extends Fragment implements View.OnClickListener,
             LightFragmentPinkSelector.setOnClickListener(this);
             LightFragmentYellowSelector.setOnClickListener(this);
             LightFragmentOrangeSelector.setOnClickListener(this);
-            TurnOnButton.setOnClickListener(this);
+            TurnOnOffButton.setOnClickListener(this);
             TheaterButton.setOnClickListener(this);
             Rainbow1Button.setOnClickListener(this);
             Raingbow2Button.setOnClickListener(this);
             BackButton.setOnClickListener(this);
-            TurnOffButton.setOnClickListener(this);
             RedSeekBar.setMax(255);
             GreenSeekBar.setMax(255);
             BlueSeekBar.setMax(255);
@@ -260,16 +263,14 @@ public class LightsFragment extends Fragment implements View.OnClickListener,
             GreenSeekBar.setOnSeekBarChangeListener(this);
             BlueSeekBar.setOnSeekBarChangeListener(this);
             if(deviceState != null) {
-                if (deviceState.getLightStatusDataString().equals(LightStatusOff))
-                    TurnOffButton.setBackground(context.getDrawable(R.drawable.selectedpeblebuttonroundedcorners));
-                else if (deviceState.getLightStatusDataString().equals(TheaterStatus))
+                if (deviceState.getLightStatusDataString().equals(TheaterStatus))
                     TheaterButton.setBackground(context.getDrawable(R.drawable.selectedpeblebuttonroundedcorners));
                 else if (deviceState.getLightStatusDataString().equals(Rainbow1Status))
                     Rainbow1Button.setBackground(context.getDrawable(R.drawable.selectedpeblebuttonroundedcorners));
                 else if (deviceState.getLightStatusDataString().equals(Rainbow2Status))
                     Raingbow2Button.setBackground(context.getDrawable(R.drawable.selectedpeblebuttonroundedcorners));
-                else if (deviceState.getLightStatusDataString().equals(LightStaticStatus))
-                    TurnOnButton.setBackground(context.getDrawable(R.drawable.selectedpeblebuttonroundedcorners));
+                else if (deviceState.getLightStatusDataString().equals("off"))
+                    TurnOnOffButton.setText(R.string.TurnLightsOnText);
             }
         }
     }
@@ -292,6 +293,11 @@ public class LightsFragment extends Fragment implements View.OnClickListener,
         GreenSeekBar.setProgress(green);
         BlueSeekBar.setProgress(blue);
         LastSetColor = id;
+        SetPreviewViewStaticColor(id);
+        SetStateColor(red,green,blue);
+    }
+    private void SetColorForBar(int red, int green,int blue){
+        int id = Color.argb(255,red,green,blue);
         SetPreviewViewStaticColor(id);
         SetStateColor(red,green,blue);
     }

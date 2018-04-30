@@ -33,6 +33,8 @@
     <string name="Pattern1Text">Pattern 1</string>
     <string name="Pattern2Text">Pattern 2</string>
     <string name="Pattern3Text">Pattern 3</string>
+    <!-- Feed Strings-->
+    <string name="TakePictureText">Take Picture</string>
     <!-- Status Strings-->
     <string name="TempText">Temp:</string>
     <string name="BaroPressureText">Barometric Pressure:</string>
@@ -40,6 +42,8 @@
 
     <!-- General Strings-->
     <string name="NotSetText">Not Set</string>
+    <string name="Key">AIzaSyDIUKMybAWPwXiw_zPYJql82xzyXtHIOT0</string>
+    <string name="CenterText">Center</string>
     <string name="BackText">Back</string>
     <string name="SaveText">Save</string>
     <string name="SetText">Set</string>

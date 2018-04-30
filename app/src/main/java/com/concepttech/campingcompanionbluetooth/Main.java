@@ -3,10 +3,8 @@ package com.concepttech.campingcompanionbluetooth;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Handler;
@@ -16,34 +14,13 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Xml;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.google.android.gms.nearby.messages.internal.Update;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xmlpull.v1.XmlSerializer;
-
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import static android.bluetooth.BluetoothDevice.ACTION_BOND_STATE_CHANGED;
 import static com.concepttech.campingcompanionbluetooth.Constants.DeviceName;
 import static com.concepttech.campingcompanionbluetooth.Constants.HomeFragmentLaunchConnection;
 import static com.concepttech.campingcompanionbluetooth.Constants.HomeFragmentLaunchLights;
@@ -60,7 +37,8 @@ public class Main extends FragmentActivity implements ConnectionFragment.Connect
                                             LightsFragment.LightsFragmentCallback,
                                             InitialSetUpFragment.InitialSetUpCallback,
                                             LocationFragment.MapFragmentCallBack,
-                                            StatusFragment.StatusFragmentCallback{
+                                            StatusFragment.StatusFragmentCallback,
+                                            FeedFragment.FeedFragmentCallback{
 
     private DeviceState deviceState;
     int timeout =0;
@@ -77,9 +55,13 @@ public class Main extends FragmentActivity implements ConnectionFragment.Connect
     private ConnectionFragment Connectionfragment;
     private LocationFragment Locationfragment;
     private StatusFragment Statusfragment;
+    private FeedFragment Feedfragment;
     public void StatusFragmentCallback(){
         StatusLoaded = false;
         CancelTimer();
+        LaunchHomeFragment();
+    }
+    public void FeedFragmentCallback(String command){
         LaunchHomeFragment();
     }
     public void MapFragmentCallBack(){
@@ -135,6 +117,10 @@ public class Main extends FragmentActivity implements ConnectionFragment.Connect
                     break;
                 case HomeFragmentLaunchLog:
                     HomeLoaded = false;
+                    if(Feedfragment == null) Feedfragment = new FeedFragment();
+                    Feedfragment.SetParameters(deviceState,context);
+                    transaction.replace(R.id.fragment_holder, Feedfragment);
+                    transaction.commit();
                     break;
                 case HomeFragmentLaunchConnection:
                     LaunchConnectionFragment();

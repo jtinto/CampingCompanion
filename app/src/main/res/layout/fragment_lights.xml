@@ -243,9 +243,9 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/LightFragmentTurnOnButton"
+            android:id="@+id/LightFragmentTurnOnOffButton"
             android:layout_gravity="center"
-            android:text="@string/TurnLightsOnText"
+            android:text="@string/TurnLightsOffText"
             android:background="@drawable/peblgreenroundedcornerssemitransparent"/>
         <Button
             android:layout_width="wrap_content"
@@ -253,13 +253,6 @@
             android:id="@+id/LightFragmentBackButton"
             android:layout_gravity="start"
             android:text="@string/BackText"
-            android:background="@drawable/peblgreenroundedcornerssemitransparent"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/TurnLightsOffButton"
-            android:layout_gravity="end"
-            android:text="@string/TurnLightsOffText"
             android:background="@drawable/peblgreenroundedcornerssemitransparent"/>
 
     </FrameLayout>

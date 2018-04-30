@@ -21,8 +21,10 @@ public class Constants {
             HomeFragmentLaunchLights = "Home:Lights",HomeFragmentLaunchStatus = "Home:Status",HomeFragmentLaunchLocation = "Home:Location",HomeFragmentLaunchLog = "Home:Log",
             HomeFragmentLaunchConnection = "Home:Connection",LightsFragmentChangeColor = "Lights:ColorCommand",LightsFragmentBack = "Lights:Home",LocationragmentBack = "Location:Home",
             DeviceName = "PEBL", ScanningText = "Scanning...", ScanText = "Scan", LightStatusOn = "static", LightStatusOff = "off", TheaterStatus = "theater", Rainbow1Status = "rainbow1",
-            Rainbow2Status = "rainbow2", LightStaticStatus = "static";
-
+            Rainbow2Status = "rainbow2", LightStaticStatus = "static",PlacesURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?", PlacesLocationTag = "&location=",
+            PlacesRadiusTag = "&radius=", PlacesTypeTag = "&types=locality", PlacesKeyTag = "&key=", CitiesNearUserDatabaseTag = "CitiesNearUser",
+            PlacesJSONResultsTag = "results" , PlacesJSONNameTag = "name", PlacesJSONIDTag = "id", UserAdminAreaTag = "AdminArea";
+    private final static String MediaIndexRegex = "[0-9]+";
     public static final int MESSAGE_STATE_CHANGE = 1,
             MAXCOLORCODES = 3,
             MaxColorPrograms = 4,
@@ -79,5 +81,8 @@ public class Constants {
         }
         return false;
     }
-
+    public static boolean isNumber(String string){
+        if(string != null && string.length() > 0) return string.matches(Constants.MediaIndexRegex);
+        else return false;
+    }
 }
