@@ -1,5 +1,6 @@
 package com.concepttech.campingcompanionbluetooth;
 
+import android.Manifest;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
@@ -64,15 +65,7 @@ public class InitialSetUpFragment extends Fragment implements View.OnClickListen
     public void onClick(View view){
         switch (view.getId()){
             case R.id.SetUpStartButton:
-                if(!checkAccessCoarseLocationPermission()){
-                    ActivityCompat.requestPermissions(getActivity(),
-                            new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
-                            1);
-                }else{
-                    if(!checkBluetooth()){
-                        RequestBluetooth();
-                    }else mCallback.InitialSetUpCallback();
-                }
+                CheckPermissions();
                 break;
         }
     }
@@ -112,9 +105,16 @@ public class InitialSetUpFragment extends Fragment implements View.OnClickListen
         super.onDetach();
         mCallback = null;
     }
-    private void RequestBluetooth(){
-        Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-        startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
+    private void CheckPermissions(){
+        if(!checkAccessCoarseLocationPermission()){
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                    1);
+        }else{
+            if(!checkBluetooth()){
+                RequestBluetooth();
+            }else mCallback.InitialSetUpCallback();
+        }
     }
     private boolean checkBluetooth(){
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -127,48 +127,32 @@ public class InitialSetUpFragment extends Fragment implements View.OnClickListen
         }
         return true;
     }
+    private void RequestBluetooth(){
+        Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+        startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
+    }
     private boolean checkAccessCoarseLocationPermission()
     {
         String permission = android.Manifest.permission.ACCESS_COARSE_LOCATION;
         int res = getContext().checkCallingOrSelfPermission(permission);
         return (res == PackageManager.PERMISSION_GRANTED);
     }
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface InitialSetUpCallback {
-        // TODO: Update argument type and name
         void InitialSetUpCallback();
     }
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
-            case 1: {
-
-                // If request is cancelled, the result arrays are empty.
+            case 1:
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if(!checkBluetooth()){
-                        RequestBluetooth();
-                    }else{
-                        mCallback.InitialSetUpCallback();
-                    }
+                    CheckPermissions();
                 } else {
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
                     Toast.makeText(getActivity().getApplicationContext(), "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
                     getActivity().finish();
                 }
-                return;
-            }
+                break;
         }
     }
 

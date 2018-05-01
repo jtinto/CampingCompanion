@@ -55,6 +55,18 @@ public class Constants {
                 "OTHERNUMLIGHTS", "OTHERLIGHTSTATUS", "CONNECTIONERROR", "MESSAGEDEST", "MESSAGESOURCE",
                 "REASON"
     };
+    public static String GetDatabaseLocationString(String country, String AdminArea, String Locality, String LocationName){
+        if(country != null && AdminArea != null && Locality != null && LocationName != null &&
+                country.length() > 1 && AdminArea.length() > 1 && Locality.length() > 1 && LocationName.length() > 1)
+            return country + "/" + AdminArea + "/" + Locality + "/" + LocationName + "/LocationData";
+        else return "";
+    }
+    public static String GetDatabaseLocationDataString(String country, String AdminArea, String Locality, String LocationName){
+        if(country != null && AdminArea != null && Locality != null && LocationName != null &&
+                country.length() > 1 && AdminArea.length() > 1 && Locality.length() > 1 && LocationName.length() > 1)
+            return country + "/" + AdminArea + "/" + Locality + "/" + LocationName + "/LocationData";
+        else return "";
+    }
     public static int LabelIndex(String label){
         if(label != null){
             if(label.length() > 0){

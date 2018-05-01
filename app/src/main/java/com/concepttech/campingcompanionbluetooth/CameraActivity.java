@@ -1,10 +1,12 @@
 package com.concepttech.campingcompanionbluetooth;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -12,6 +14,7 @@ import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Surface;
@@ -19,6 +22,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -45,6 +49,7 @@ public class CameraActivity extends Activity {
     private File SaveDirectory, SaveFile;
     private Context view_context=null;
     private Button video_button;
+    private Bundle savedInstanceState;
     private void connectCamera(){
         mCamera = Camera.open(FrontCameraID);
     }
@@ -52,10 +57,34 @@ public class CameraActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.savedInstanceState = savedInstanceState;
         setContentView(R.layout.activity_camera);
         context = getApplicationContext();
         if (context != null)
             SaveDirectory = context.getExternalFilesDir(Environment.DIRECTORY_MOVIES);
+        else finish();
+        if(!checkCameraPermission()){
+            ActivityCompat.requestPermissions(CameraActivity.this,
+                    new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                    1);
+        }else Initialize();
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Initialize();
+                } else {
+                    Toast.makeText(context, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                break;
+        }
+    }
+    private void Initialize(){
         check_storage();
         FrontCameraID = findFrontFacingCamera();
         handleIntent(savedInstanceState);
@@ -63,8 +92,6 @@ public class CameraActivity extends Activity {
         setSaveFile();
         setCamera();
         set_preview();
-        // Create our Preview view and set it as the content of our activity.
-
         video_button = findViewById(R.id.video_record_button);
         video_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +100,12 @@ public class CameraActivity extends Activity {
                 displayKeepDialog();
             }
         });
+    }
+    private boolean checkCameraPermission()
+    {
+        String permission = Manifest.permission.CAMERA;
+        int res = context.checkCallingOrSelfPermission(permission);
+        return (res == PackageManager.PERMISSION_GRANTED);
     }
     private void setSaveFile(){
         SaveFile = new File(SaveDirectory + "/" + MainLocation);
@@ -158,14 +191,9 @@ public class CameraActivity extends Activity {
     }
     public void set_preview(){
         if (!set_up_done && mCamera != null) {
-
-            Log.d(TAG, "before preview set");
             mPreview = new CameraPreview(getApplicationContext(), mCamera);
-            Log.d(TAG, "after");
             FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-            Log.d(TAG, "frame layout set");
             preview.addView(mPreview);
-            Log.d(TAG, "add prieview");
             set_up_done = true;
         }
     }
@@ -223,11 +251,9 @@ public class CameraActivity extends Activity {
         }
     }
     private void rotateImage(String file) throws IOException {
-
         BitmapFactory.Options bounds = new BitmapFactory.Options();
         bounds.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(file, bounds);
-
         BitmapFactory.Options opts = new BitmapFactory.Options();
         Bitmap bm = BitmapFactory.decodeFile(file, opts);
         Matrix matrix = new Matrix();
@@ -275,7 +301,6 @@ public class CameraActivity extends Activity {
 
         // Search for the front facing camera
         int cameraId = 0;
-        boolean cameraFront = false;
         int numberOfCameras = Camera.getNumberOfCameras();
         for (int i = 0; i < numberOfCameras; i++) {
             Camera.CameraInfo info = new Camera.CameraInfo();
@@ -283,7 +308,6 @@ public class CameraActivity extends Activity {
             if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
                 Log.d(TAG,"Camera_Activity:Camera.open:findfrontcamera:found:"+i);
                 cameraId = i;
-                cameraFront = true;
                 break;
             }
         }
@@ -302,12 +326,10 @@ public class CameraActivity extends Activity {
     private Camera.PictureCallback mPicture = new Camera.PictureCallback(){
         @Override
         public void onPictureTaken(byte[] data, Camera camera){
-
             if(SaveFile == null){
                 Log.d("TEST", "Error creating media file, check storage permissions");
                 return;
             }
-
             try{
                 FileOutputStream fos = new FileOutputStream(SaveFile);
                 fos.write(data);

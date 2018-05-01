@@ -1,12 +1,17 @@
 package com.concepttech.campingcompanionbluetooth;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,7 +25,13 @@ import com.google.android.gms.location.places.PlaceBufferResponse;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
@@ -32,6 +43,8 @@ import java.util.Locale;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import static com.concepttech.campingcompanionbluetooth.Constants.GetDatabaseLocationDataString;
+import static com.concepttech.campingcompanionbluetooth.Constants.GetDatabaseLocationString;
 import static com.concepttech.campingcompanionbluetooth.Constants.PlacesJSONIDTag;
 import static com.concepttech.campingcompanionbluetooth.Constants.PlacesJSONResultsTag;
 import static com.concepttech.campingcompanionbluetooth.Constants.PlacesKeyTag;
@@ -50,10 +63,13 @@ public class FeedFragment extends Fragment {
     private FeedListAdapter feedListAdapter;
     private FeedFragmentCallback mListener;
     private ValueEventListener FeedListener;
+    private Query FeedReference;
     private DeviceState deviceState;
     private Context context;
     private String Country, AdminArea, Locality, LocationName;
     private boolean ListenerSet = false;
+    private int PhotoCount = 0;
+    private FirebaseUser User;
     public FeedFragment() {
         // Required empty public constructor
     }
@@ -84,9 +100,12 @@ public class FeedFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_feed_fragrment, container, false);
+        User = FirebaseAuth.getInstance().getCurrentUser();
+        if(User == null){
+
+        }
         getLocation();
         if(feedListAdapter == null) feedListAdapter = new FeedListAdapter(getContext());
-        if(!ListenerSet) SetListener();
         return view;
     }
 
@@ -100,17 +119,74 @@ public class FeedFragment extends Fragment {
                     + " must implement OnFragmentInteractionListener");
         }
     }
-
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {getLocation();
+                } else {
+                    Toast.makeText(context, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
+                    getActivity().finish();
+                }
+                break;
+        }
+    }
+    private void SignInDialog(){
+
+    }
+    private boolean checkAccessFineLocationPermission(){
+        String permission = Manifest.permission.ACCESS_FINE_LOCATION;
+        int res = context.checkCallingOrSelfPermission(permission);
+        return (res == PackageManager.PERMISSION_GRANTED);
+    }
+    private void getDeviceLocation(){
+        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        String locationProvider = LocationManager.NETWORK_PROVIDER;
+        if(locationManager != null) {
+            try {
+                Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
+                Geocoder gcd = new Geocoder(context, Locale.getDefault());
+                List<Address> addresses;
+                addresses = gcd.getFromLocation(lastKnownLocation.getLatitude(),
+                        lastKnownLocation.getLongitude(), 1);
+                if (addresses.size() > 0) {
+                    Locality = addresses.get(0).getLocality();
+                    Country = addresses.get(0).getCountryName();
+                    AdminArea = addresses.get(0).getAdminArea();
+                    LocationName = addresses.get(0).getFeatureName();
+                }
+            } catch (SecurityException e) {
+                Log.e(TAG, "Exception getting location");
+            } catch (Exception e) {
+                Log.e(TAG, "Exception getting city: " + e.getMessage());
+            }
+        }
+    }
     private void getLocation(){
         try {
             String key = getResources().getString(R.string.Key);
-            String url = PlacesURL + PlacesLocationTag + deviceState.getLatitude() + "," + deviceState.getLongitude() +
+            String url;
+            if(deviceState.getLongitude() != 0 && deviceState.getLatitude() != 0)
+                url = PlacesURL + PlacesLocationTag + deviceState.getLatitude() + "," + deviceState.getLongitude() +
                     PlacesRadiusTag + 5 + PlacesKeyTag + key;
+            else {
+                if(!checkAccessFineLocationPermission()){
+                    ActivityCompat.requestPermissions(getActivity(),
+                            new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                            1);
+                    return;
+                }else {
+                    getDeviceLocation();
+                    return;
+                }
+            }
             URL Url = new URL(url);
             HttpsURLConnection connection = (HttpsURLConnection) Url.openConnection();
             connection.setDoInput(true);
@@ -145,6 +221,7 @@ public class FeedFragment extends Fragment {
         }catch (Exception e){
             Log.e(TAG, "Error getting location data");
         }
+        GetLocationData();
     }
     private void getAddressFromID(String placeid){
         try {
@@ -188,9 +265,56 @@ public class FeedFragment extends Fragment {
         }
         return null;
     }
+    private void GetLocationData() {
+        DatabaseReference locationdatareference =
+                FirebaseDatabase.getInstance().getReference(GetDatabaseLocationDataString(Country, AdminArea, Locality, LocationName));
+        locationdatareference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot != null && dataSnapshot.hasChildren()) {
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        switch (child.getKey()) {
+                            case "PhotoCount":
+                                if (child.getValue() != null) PhotoCount = (int) child.getValue();
+                                break;
+                        }
+                    }
+                }
+                if(!ListenerSet) SetListener();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                ListenerSet = false;
+            }
+        });
+    }
     private void SetListener(){
         if(FeedListener == null){
-
+            FeedReference =
+                    FirebaseDatabase.getInstance().getReference(GetDatabaseLocationString(Country,AdminArea,Locality,LocationName)).limitToFirst(20);
+            FeedReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    FeedListener = this;
+                    if(dataSnapshot != null && dataSnapshot.hasChildren()){
+                        for (DataSnapshot child : dataSnapshot.getChildren()) {
+                            if(child.hasChildren()) for (DataSnapshot data : child.getChildren()) {
+                                switch (data.getKey()) {
+                                    case "Location":
+                                        if (child.getValue() != null) PhotoCount = (int) child.getValue();
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    ListenerSet = false;
+                }
+            });
+            ListenerSet = true;
         }
     }
     public interface FeedFragmentCallback {
