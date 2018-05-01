@@ -22,7 +22,7 @@ public class Constants {
             HomeFragmentLaunchConnection = "Home:Connection",LightsFragmentChangeColor = "Lights:ColorCommand",LightsFragmentBack = "Lights:Home",LocationragmentBack = "Location:Home",
             DeviceName = "PEBL", ScanningText = "Scanning...", ScanText = "Scan", LightStatusOn = "static", LightStatusOff = "off", TheaterStatus = "theater", Rainbow1Status = "rainbow1",
             Rainbow2Status = "rainbow2", LightStaticStatus = "static",PlacesURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?", PlacesLocationTag = "&location=",
-            PlacesRadiusTag = "&radius=", PlacesTypeTag = "&types=locality", PlacesKeyTag = "&key=", CitiesNearUserDatabaseTag = "CitiesNearUser",
+            PlacesRadiusTag = "&radius=", PlacesTypeTag = "&types=locality", PlacesKeyTag = "&key=", CitiesNearUserDatabaseTag = "CitiesNearUser", FeedFragmentHomeCommand = "Feed:Home",
             PlacesJSONResultsTag = "results" , PlacesJSONNameTag = "name", PlacesJSONIDTag = "id", UserAdminAreaTag = "AdminArea";
     private final static String MediaIndexRegex = "[0-9]+";
     public static final int MESSAGE_STATE_CHANGE = 1,

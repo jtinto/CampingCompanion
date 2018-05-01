@@ -2,13 +2,15 @@ package com.concepttech.campingcompanionbluetooth;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -38,11 +40,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import static com.concepttech.campingcompanionbluetooth.Constants.FeedFragmentHomeCommand;
 import static com.concepttech.campingcompanionbluetooth.Constants.GetDatabaseLocationDataString;
 import static com.concepttech.campingcompanionbluetooth.Constants.GetDatabaseLocationString;
 import static com.concepttech.campingcompanionbluetooth.Constants.PlacesJSONIDTag;
@@ -50,7 +54,6 @@ import static com.concepttech.campingcompanionbluetooth.Constants.PlacesJSONResu
 import static com.concepttech.campingcompanionbluetooth.Constants.PlacesKeyTag;
 import static com.concepttech.campingcompanionbluetooth.Constants.PlacesLocationTag;
 import static com.concepttech.campingcompanionbluetooth.Constants.PlacesRadiusTag;
-import static com.concepttech.campingcompanionbluetooth.Constants.PlacesTypeTag;
 import static com.concepttech.campingcompanionbluetooth.Constants.PlacesURL;
 
 
@@ -66,8 +69,10 @@ public class FeedFragment extends Fragment {
     private Query FeedReference;
     private DeviceState deviceState;
     private Context context;
-    private String Country, AdminArea, Locality, LocationName;
-    private boolean ListenerSet = false;
+    private String Country, AdminArea, Locality, LocationName,LastEntryKey;
+    private ArrayList<String> Locations = new ArrayList<>();
+    private ArrayList<TimeStamp> TimeStamps = new ArrayList<>();
+    private boolean ListenerSet = false, PromptedForLocation = false, GrantedLocation = false;
     private int PhotoCount = 0;
     private FirebaseUser User;
     public FeedFragment() {
@@ -120,6 +125,11 @@ public class FeedFragment extends Fragment {
         }
     }
     @Override
+    public void onDestroy(){
+        if(FeedReference != null && FeedListener != null) FeedReference.removeEventListener(FeedListener);
+        super.onDestroy();
+    }
+    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
@@ -169,6 +179,26 @@ public class FeedFragment extends Fragment {
             }
         }
     }
+    private void PromptForLocationUse(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("Message");
+        builder.setPositiveButton("Yes", new Dialog.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                GrantedLocation = true;
+            }
+        });
+        builder.setNegativeButton("No", new Dialog.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                GrantedLocation = false;
+            }
+        });
+        PromptedForLocation = true;
+        builder.show();
+    }
     private void getLocation(){
         try {
             String key = getResources().getString(R.string.Key);
@@ -178,10 +208,19 @@ public class FeedFragment extends Fragment {
                     PlacesRadiusTag + 5 + PlacesKeyTag + key;
             else {
                 if(!checkAccessFineLocationPermission()){
-                    ActivityCompat.requestPermissions(getActivity(),
-                            new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-                            1);
-                    return;
+                    if(!PromptedForLocation) {
+                        PromptForLocationUse();
+                        return;
+                    }
+                    else if(GrantedLocation) {
+                        ActivityCompat.requestPermissions(getActivity(),
+                                new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                                1);
+                        return;
+                    }else {
+                        mListener.FeedFragmentCallback(FeedFragmentHomeCommand);
+                        return;
+                    }
                 }else {
                     getDeviceLocation();
                     return;
@@ -280,7 +319,7 @@ public class FeedFragment extends Fragment {
                         }
                     }
                 }
-                if(!ListenerSet) SetListener();
+                if(!ListenerSet && PhotoCount > 0) GetEntries();
             }
 
             @Override
@@ -289,10 +328,12 @@ public class FeedFragment extends Fragment {
             }
         });
     }
-    private void SetListener(){
+    private void GetEntries(){
         if(FeedListener == null){
-            FeedReference =
-                    FirebaseDatabase.getInstance().getReference(GetDatabaseLocationString(Country,AdminArea,Locality,LocationName)).limitToFirst(20);
+            if(LastEntryKey != null && LastEntryKey.length() > 0) FeedReference =
+                    FirebaseDatabase.getInstance().getReference(GetDatabaseLocationString(Country,AdminArea,Locality,LocationName)).orderByKey().limitToLast(20);
+            else FeedReference =
+                    FirebaseDatabase.getInstance().getReference(GetDatabaseLocationString(Country,AdminArea,Locality,LocationName)).orderByKey().limitToLast(20).startAt(LastEntryKey);
             FeedReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -302,12 +343,26 @@ public class FeedFragment extends Fragment {
                             if(child.hasChildren()) for (DataSnapshot data : child.getChildren()) {
                                 switch (data.getKey()) {
                                     case "Location":
-                                        if (child.getValue() != null) PhotoCount = (int) child.getValue();
+                                        if (child.getValue() != null && !Locations.contains(child.getValue().toString())) Locations.add(child.getValue().toString());
+                                        break;
+                                    case "TimeStamp":
+                                        if (child.getValue() != null) {
+                                            TimeStamp temp = new TimeStamp();
+                                            temp.buildFromSnapshot(child);
+                                            if(!TimeStamps.contains(temp)) TimeStamps.add(temp);
+                                        }
                                         break;
                                 }
                             }
+                            if(Locations.size() > TimeStamps.size()) Locations.remove(Locations.size() - 1);
+                            else if(Locations.size() < TimeStamps.size()) TimeStamps.remove(TimeStamps.size() - 1);
+                            LastEntryKey = child.getKey();
                         }
                     }
+                    if(TimeStamps.size() > 0) feedListAdapter.SetTimeStamps(TimeStamps);
+                    feedListAdapter.notifyDataSetChanged();
+                    FeedReference.removeEventListener(FeedListener);
+                    FeedListener = null;
                 }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {

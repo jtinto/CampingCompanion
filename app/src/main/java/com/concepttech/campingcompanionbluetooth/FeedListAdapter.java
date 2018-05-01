@@ -3,6 +3,7 @@ package com.concepttech.campingcompanionbluetooth;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -51,10 +52,14 @@ public class FeedListAdapter extends BaseAdapter implements ListAdapter {
         }
 
         //Handle TextView and display string from your list
-        if (!Pictures.isEmpty() && view != null) {
+        if (!TimeStamps.isEmpty() && view != null) {
             ImageView listItemImage =view.findViewById(R.id.FeedListItemImageView);
             TextView listItemText = view.findViewById(R.id.FeedListItemText);
-            listItemImage.setImageURI(Uri.fromFile(Pictures.get(position)));
+            if(position < Pictures.size()) listItemImage.setImageURI(Uri.fromFile(Pictures.get(position)));
+            else {
+                listItemImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_cached_white_48dp));
+                listItemImage.setBackgroundColor(context.getResources().getColor(R.color.SelectedButtonColor));
+            }
             listItemText.setText(TimeStamps.get(position).get_time_string());
         }else if(view != null){
             TextView listItemText = view.findViewById(R.id.FeedListItemText);
@@ -63,5 +68,5 @@ public class FeedListAdapter extends BaseAdapter implements ListAdapter {
         }
         return view;
     }
-
+    public void SetTimeStamps(ArrayList<TimeStamp> arg){ this.TimeStamps = arg;}
 }
