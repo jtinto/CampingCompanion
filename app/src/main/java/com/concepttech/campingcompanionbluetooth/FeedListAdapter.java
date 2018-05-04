@@ -27,12 +27,12 @@ public class FeedListAdapter extends BaseAdapter implements ListAdapter {
 
     @Override
     public int getCount() {
-        return Pictures.size();
+        return TimeStamps.size();
     }
 
     @Override
     public Object getItem(int pos) {
-        return Pictures.get(pos);
+        return TimeStamps.get(pos);
     }
 
     @Override
@@ -48,25 +48,41 @@ public class FeedListAdapter extends BaseAdapter implements ListAdapter {
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             if(inflater != null) view = inflater.inflate(R.layout.feed_list_item, null);
-            else return null;
         }
 
         //Handle TextView and display string from your list
         if (!TimeStamps.isEmpty() && view != null) {
             ImageView listItemImage =view.findViewById(R.id.FeedListItemImageView);
             TextView listItemText = view.findViewById(R.id.FeedListItemText);
-            if(position < Pictures.size()) listItemImage.setImageURI(Uri.fromFile(Pictures.get(position)));
-            else {
-                listItemImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_cached_white_48dp));
-                listItemImage.setBackgroundColor(context.getResources().getColor(R.color.SelectedButtonColor));
+            if(position < Pictures.size() && Pictures.get(position) != null) {
+                listItemImage.setImageURI(Uri.fromFile(Pictures.get(position)));
+                String temp = "Uploaded on: " + TimeStamps.get(position).get_time_string();
+                listItemText.setText(temp);
             }
-            listItemText.setText(TimeStamps.get(position).get_time_string());
-        }else if(view != null){
-            TextView listItemText = view.findViewById(R.id.FeedListItemText);
-            String no_text = "Be the First to Upload Pictures";
-            listItemText.setText(no_text);
+            else {
+                if (position < Pictures.size() && Pictures.get(position) == null) {
+                    listItemImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_cached_white_48dp));
+                    listItemImage.setBackgroundColor(context.getResources().getColor(R.color.SelectedButtonColor));
+                    String temp = "Uploaded on: " + TimeStamps.get(position).get_time_string();
+                    listItemText.setText(temp);
+                }else {
+                    if(Pictures.size() == 0) {
+                        listItemImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_cached_white_48dp));
+                        listItemImage.setBackgroundColor(context.getResources().getColor(R.color.SelectedButtonColor));
+                        String no_text = "Be the First to Upload Pictures";
+                        listItemText.setText(no_text);
+                    }else{
+                        while(Pictures.size() < TimeStamps.size())TimeStamps.remove(TimeStamps.size() - 1);
+                        notifyDataSetChanged();
+                    }
+                }
+            }
         }
         return view;
+    }
+    public void SetPictureFile(File file, int index){
+        while(index >= Pictures.size())Pictures.add(null);
+        Pictures.set(index,file);
     }
     public void SetTimeStamps(ArrayList<TimeStamp> arg){ this.TimeStamps = arg;}
 }

@@ -23,7 +23,8 @@ public class Constants {
             DeviceName = "PEBL", ScanningText = "Scanning...", ScanText = "Scan", LightStatusOn = "static", LightStatusOff = "off", TheaterStatus = "theater", Rainbow1Status = "rainbow1",
             Rainbow2Status = "rainbow2", LightStaticStatus = "static",PlacesURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?", PlacesLocationTag = "&location=",
             PlacesRadiusTag = "&radius=", PlacesTypeTag = "&types=locality", PlacesKeyTag = "&key=", CitiesNearUserDatabaseTag = "CitiesNearUser", FeedFragmentHomeCommand = "Feed:Home",
-            PlacesJSONResultsTag = "results" , PlacesJSONNameTag = "name", PlacesJSONIDTag = "id", UserAdminAreaTag = "AdminArea";
+            PlacesJSONResultsTag = "results" , PlacesJSONNameTag = "name", PlacesJSONIDTag = "id", UserAdminAreaTag = "AdminArea", FeedCameraCommand = "Feed:Camera",
+            MainLocationTag = "MainLocation", PhotoCountTag = "PhotoCount", PhotoCountIntentID = "PhotoCountIntentID", PhotoName = "Photo.jpg";
     private final static String MediaIndexRegex = "[0-9]+";
     public static final int MESSAGE_STATE_CHANGE = 1,
             MAXCOLORCODES = 3,
@@ -37,7 +38,7 @@ public class Constants {
             UPADATEDATAPHONE2HUB = 1,
             UPDATEDATAHUB2PHONE = 2,
             COMMAND = 3,
-            SOCIALMESSAGE = 4,
+            Disconnect = 4,
             COMMANDCONFIRMATION = 5,
             RESENDREQUEST = 6,
             RESENDREQUESTCONFIRMATION = 7,
@@ -58,13 +59,19 @@ public class Constants {
     public static String GetDatabaseLocationString(String country, String AdminArea, String Locality, String LocationName){
         if(country != null && AdminArea != null && Locality != null && LocationName != null &&
                 country.length() > 1 && AdminArea.length() > 1 && Locality.length() > 1 && LocationName.length() > 1)
-            return country + "/" + AdminArea + "/" + Locality + "/" + LocationName + "/LocationData";
+            return (country + "/" + AdminArea + "/" + Locality + "/" + LocationName).replace(" ","").replace(",","");
         else return "";
     }
     public static String GetDatabaseLocationDataString(String country, String AdminArea, String Locality, String LocationName){
         if(country != null && AdminArea != null && Locality != null && LocationName != null &&
                 country.length() > 1 && AdminArea.length() > 1 && Locality.length() > 1 && LocationName.length() > 1)
-            return country + "/" + AdminArea + "/" + Locality + "/" + LocationName + "/LocationData";
+            return (country + "/" + AdminArea + "/" + Locality + "/" + LocationName + "/LocationData").replace(" ","").replace(",","");
+        else return "";
+    }
+    public static String GetDatabaseLocationPhotoCountDataString(String country, String AdminArea, String Locality, String LocationName){
+        if(country != null && AdminArea != null && Locality != null && LocationName != null &&
+                country.length() > 1 && AdminArea.length() > 1 && Locality.length() > 1 && LocationName.length() > 1)
+            return (country + "/" + AdminArea + "/" + Locality + "/" + LocationName + "/LocationData/"+PhotoCountTag).replace(" ","").replace(",","");
         else return "";
     }
     public static int LabelIndex(String label){

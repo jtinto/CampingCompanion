@@ -6,6 +6,17 @@
     tools:context=".FeedFragment"
     android:background="@drawable/blurredbackground"
     android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".1"
+        android:gravity="center"
+        android:background="@drawable/white_semi_transparent_roundedcorners"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:id="@+id/FeedHeader"/>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -16,18 +27,24 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight=".2">
+        android:layout_weight=".1">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:text="@string/TakePictureText"
+            android:id="@+id/FeedCameraButton"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/peblgreenroundedcornerssemitransparent"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
             android:text="@string/BackText"
+            android:id="@+id/FeedBackButton"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="10dp"
             android:background="@drawable/peblgreenroundedcornerssemitransparent"/>
 
     </FrameLayout>

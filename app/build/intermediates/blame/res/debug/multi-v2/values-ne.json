@@ -1,44 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/yang/Desktop/github/CampingCompanion/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ne/values-ne.xml",
+            "outputFile": "D:\\jtint\\AndroidProjects\\CampingCompanion\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ne\\values-ne.xml",
             "map": [
                 {
-                    "source": "/Users/yang/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/1b6e94dfcb9590e7bdeb49d674cd20e9/res/values-ne/values-ne.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "22",
-                        "startColumns": "4",
-                        "startOffsets": "3135",
-                        "endColumns": "100",
-                        "endOffsets": "3231"
-                    }
-                },
-                {
-                    "source": "/Users/yang/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/2dae0da91044645e8ae4ffdca6250ed3/res/values-ne/values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
-                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "245,358,548,680,795,1025,1159,1295,1425,1664,1780,1975,2110,2317,2495,2587,2685",
-                        "endColumns": "112,189,131,114,229,133,135,129,238,115,194,134,206,177,91,97,116",
-                        "endOffsets": "357,547,679,794,1024,1158,1294,1424,1663,1779,1974,2109,2316,2494,2586,2684,2801"
-                    },
-                    "to": {
-                        "startLines": "2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,222,412,548,667,897,1035,1175,1532,1771,1891,2086,2225,2432,2614,2710,2812",
-                        "endColumns": "116,189,135,118,229,137,139,133,238,119,194,138,206,181,95,101,120",
-                        "endOffsets": "217,407,543,662,892,1030,1170,1304,1766,1886,2081,2220,2427,2609,2705,2807,2928"
-                    }
-                },
-                {
-                    "source": "/Users/yang/.gradle/caches/transforms-1/files-1.1/play-services-places-12.0.1.aar/bf042fc9552769ec18a7f264c12347e4/res/values-ne/values.xml",
+                    "source": "C:\\Users\\jtint\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-places-12.0.1.aar\\e2032f2bb99ad3709368925287ece757\\res\\values-ne\\values.xml",
                     "from": {
                         "startLines": "4,5",
                         "startColumns": "0,0",
@@ -55,7 +21,41 @@
                     }
                 },
                 {
-                    "source": "/Users/yang/.gradle/caches/transforms-1/files-1.1/play-services-basement-12.0.1.aar/a1ffe614b66cbc10561b32ae0ea5ad14/res/values-ne/values.xml",
+                    "source": "C:\\Users\\jtint\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\11ace5c308d5c4abca56674e2d457b4c\\res\\values-ne\\values-ne.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "22",
+                        "startColumns": "4",
+                        "startOffsets": "3135",
+                        "endColumns": "100",
+                        "endOffsets": "3231"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\jtint\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-12.0.1.aar\\b7ec2082414e467c9d01dfc70e2bc502\\res\\values-ne\\values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "245,358,548,680,795,1025,1159,1295,1425,1664,1780,1975,2110,2317,2495,2587,2685",
+                        "endColumns": "112,189,131,114,229,133,135,129,238,115,194,134,206,177,91,97,116",
+                        "endOffsets": "357,547,679,794,1024,1158,1294,1424,1663,1779,1974,2109,2316,2494,2586,2684,2801"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,222,412,548,667,897,1035,1175,1532,1771,1891,2086,2225,2432,2614,2710,2812",
+                        "endColumns": "116,189,135,118,229,137,139,133,238,119,194,138,206,181,95,101,120",
+                        "endOffsets": "217,407,543,662,892,1030,1170,1304,1766,1886,2081,2220,2427,2609,2705,2807,2928"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\jtint\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-12.0.1.aar\\e7fad05d6175794a93ed6d5520c2a75b\\res\\values-ne\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",

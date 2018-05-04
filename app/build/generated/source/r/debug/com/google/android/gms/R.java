@@ -97,30 +97,30 @@ public final class R {
         public static final int powered_by_google_light = 0x7f05002d;
     }
     public static final class id {
-        public static final int adjust_height = 0x7f060035;
-        public static final int adjust_width = 0x7f060036;
-        public static final int auto = 0x7f060039;
-        public static final int center = 0x7f060041;
-        public static final int dark = 0x7f060049;
-        public static final int hybrid = 0x7f060056;
-        public static final int icon_only = 0x7f060059;
-        public static final int light = 0x7f06005f;
-        public static final int none = 0x7f060065;
-        public static final int normal = 0x7f060066;
-        public static final int place_autocomplete_clear_button = 0x7f06006e;
-        public static final int place_autocomplete_powered_by_google = 0x7f06006f;
-        public static final int place_autocomplete_prediction_primary_text = 0x7f060070;
-        public static final int place_autocomplete_prediction_secondary_text = 0x7f060071;
-        public static final int place_autocomplete_progress = 0x7f060072;
-        public static final int place_autocomplete_search_button = 0x7f060073;
-        public static final int place_autocomplete_search_input = 0x7f060074;
-        public static final int place_autocomplete_separator = 0x7f060075;
-        public static final int satellite = 0x7f06007b;
-        public static final int standard = 0x7f060080;
-        public static final int terrain = 0x7f060087;
-        public static final int text = 0x7f060088;
-        public static final int text2 = 0x7f060089;
-        public static final int wide = 0x7f060091;
+        public static final int adjust_height = 0x7f060044;
+        public static final int adjust_width = 0x7f060045;
+        public static final int auto = 0x7f060048;
+        public static final int center = 0x7f060050;
+        public static final int dark = 0x7f060058;
+        public static final int hybrid = 0x7f060065;
+        public static final int icon_only = 0x7f060068;
+        public static final int light = 0x7f06006e;
+        public static final int none = 0x7f060074;
+        public static final int normal = 0x7f060075;
+        public static final int place_autocomplete_clear_button = 0x7f06007d;
+        public static final int place_autocomplete_powered_by_google = 0x7f06007e;
+        public static final int place_autocomplete_prediction_primary_text = 0x7f06007f;
+        public static final int place_autocomplete_prediction_secondary_text = 0x7f060080;
+        public static final int place_autocomplete_progress = 0x7f060081;
+        public static final int place_autocomplete_search_button = 0x7f060082;
+        public static final int place_autocomplete_search_input = 0x7f060083;
+        public static final int place_autocomplete_separator = 0x7f060084;
+        public static final int satellite = 0x7f06008a;
+        public static final int standard = 0x7f06008f;
+        public static final int terrain = 0x7f060096;
+        public static final int text = 0x7f060097;
+        public static final int text2 = 0x7f060098;
+        public static final int wide = 0x7f06009f;
     }
     public static final class integer {
         public static final int google_play_services_version = 0x7f070001;
@@ -132,26 +132,26 @@ public final class R {
         public static final int place_autocomplete_progress = 0x7f080022;
     }
     public static final class string {
-        public static final int common_google_play_services_enable_button = 0x7f0a001f;
-        public static final int common_google_play_services_enable_text = 0x7f0a0020;
-        public static final int common_google_play_services_enable_title = 0x7f0a0021;
-        public static final int common_google_play_services_install_button = 0x7f0a0022;
-        public static final int common_google_play_services_install_text = 0x7f0a0023;
-        public static final int common_google_play_services_install_title = 0x7f0a0024;
-        public static final int common_google_play_services_notification_channel_name = 0x7f0a0025;
-        public static final int common_google_play_services_notification_ticker = 0x7f0a0026;
-        public static final int common_google_play_services_unknown_issue = 0x7f0a0027;
-        public static final int common_google_play_services_unsupported_text = 0x7f0a0028;
-        public static final int common_google_play_services_update_button = 0x7f0a0029;
-        public static final int common_google_play_services_update_text = 0x7f0a002a;
-        public static final int common_google_play_services_update_title = 0x7f0a002b;
-        public static final int common_google_play_services_updating_text = 0x7f0a002c;
-        public static final int common_google_play_services_wear_update_text = 0x7f0a002d;
-        public static final int common_open_on_phone = 0x7f0a002e;
-        public static final int common_signin_button_text = 0x7f0a002f;
-        public static final int common_signin_button_text_long = 0x7f0a0030;
-        public static final int place_autocomplete_clear_button = 0x7f0a003b;
-        public static final int place_autocomplete_search_hint = 0x7f0a003c;
+        public static final int common_google_play_services_enable_button = 0x7f0a0026;
+        public static final int common_google_play_services_enable_text = 0x7f0a0027;
+        public static final int common_google_play_services_enable_title = 0x7f0a0028;
+        public static final int common_google_play_services_install_button = 0x7f0a0029;
+        public static final int common_google_play_services_install_text = 0x7f0a002a;
+        public static final int common_google_play_services_install_title = 0x7f0a002b;
+        public static final int common_google_play_services_notification_channel_name = 0x7f0a002c;
+        public static final int common_google_play_services_notification_ticker = 0x7f0a002d;
+        public static final int common_google_play_services_unknown_issue = 0x7f0a002e;
+        public static final int common_google_play_services_unsupported_text = 0x7f0a002f;
+        public static final int common_google_play_services_update_button = 0x7f0a0030;
+        public static final int common_google_play_services_update_text = 0x7f0a0031;
+        public static final int common_google_play_services_update_title = 0x7f0a0032;
+        public static final int common_google_play_services_updating_text = 0x7f0a0033;
+        public static final int common_google_play_services_wear_update_text = 0x7f0a0034;
+        public static final int common_open_on_phone = 0x7f0a0035;
+        public static final int common_signin_button_text = 0x7f0a0036;
+        public static final int common_signin_button_text_long = 0x7f0a0037;
+        public static final int place_autocomplete_clear_button = 0x7f0a0042;
+        public static final int place_autocomplete_search_hint = 0x7f0a0043;
     }
     public static final class styleable {
         public static final int[] LoadingImageView = { 0x7f01000c, 0x7f01001c, 0x7f01001d };

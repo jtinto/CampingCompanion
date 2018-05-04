@@ -16,6 +16,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -37,6 +38,7 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
     private View view;
     private DeviceState deviceState;
     private MapFragmentCallBack mListener;
+    private CameraPosition LastPosition;
     private Timer timer;
     Button CenterButton;
 
@@ -60,6 +62,7 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
                 mListener.MapFragmentCallBack();
             case R.id.MapFragmentCenterButton:
                 MapBeingInteractedwith = false;
+                LastPosition = Map.getCameraPosition();
                 CenterButton.setVisibility(View.INVISIBLE);
                 UpdateLocation();
         }
@@ -82,7 +85,7 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
         Button back = view.findViewById(R.id.MapFragmentBackButton);
         back.setOnClickListener(this);
         CenterButton = view.findViewById(R.id.MapFragmentCenterButton);
-        back.setOnClickListener(this);
+        CenterButton.setOnClickListener(this);
         mapView = view.findViewById(R.id.MapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
@@ -91,27 +94,6 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
                 Map = googleMap;
                 UpdateLocation();
                 StartTimer();
-            }
-        });
-        mapView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                MapBeingInteractedwith = true;
-                CenterButton.setVisibility(View.VISIBLE);
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        startX = motionEvent.getX();
-                        startY = motionEvent.getY();
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        float endX = motionEvent.getX();
-                        float endY = motionEvent.getY();
-                        if (isAClick(startX, endX, startY, endY)) {
-                            view.performClick();
-                        }
-                        break;
-                }
-                return false;
             }
         });
         return view;
@@ -142,8 +124,15 @@ public class LocationFragment extends Fragment implements View.OnClickListener{
             } else {
                 coordinates = new LatLng(37.716226, -97.287538);
             }
+            if(LastPosition != null && !Map.getCameraPosition().equals(LastPosition)){
+                MapBeingInteractedwith = true;
+                CenterButton.setVisibility(View.VISIBLE);
+            }
             Map.addMarker(new MarkerOptions().position(coordinates));
-            if(!MapBeingInteractedwith) Map.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 5));
+            if(!MapBeingInteractedwith){
+                Map.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 20));
+                LastPosition = Map.getCameraPosition();
+            }
             mapView.onResume();
         }
     }

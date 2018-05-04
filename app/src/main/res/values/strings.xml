@@ -35,6 +35,11 @@
     <string name="Pattern3Text">Pattern 3</string>
     <!-- Feed Strings-->
     <string name="TakePictureText">Take Picture</string>
+    <string name="EmailHint">Email</string>
+    <string name="PasswordHint">Password</string>
+    <string name="ConfirmPasswordHint">Confirm Password</string>
+    <string name="SignInText">Sign In</string>
+    <string name="NewAccountText">Don\'t have an account?</string>
     <!-- Status Strings-->
     <string name="TempText">Temp:</string>
     <string name="BaroPressureText">Barometric Pressure:</string>
@@ -44,7 +49,9 @@
     <string name="NotSetText">Not Set</string>
     <string name="Key">AIzaSyDIUKMybAWPwXiw_zPYJql82xzyXtHIOT0</string>
     <string name="CenterText">Center</string>
+    <string name="ClickHereText">Click Here</string>
     <string name="BackText">Back</string>
+    <string name="CancelText">Cancel</string>
     <string name="SaveText">Save</string>
     <string name="SetText">Set</string>
 </resources>

@@ -16,12 +16,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.lang.reflect.Method;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import static com.concepttech.campingcompanionbluetooth.Constants.DeviceName;
+import static com.concepttech.campingcompanionbluetooth.Constants.FeedCameraCommand;
+import static com.concepttech.campingcompanionbluetooth.Constants.FeedFragmentHomeCommand;
+import static com.concepttech.campingcompanionbluetooth.Constants.GetDatabaseLocationDataString;
+import static com.concepttech.campingcompanionbluetooth.Constants.GetDatabaseLocationPhotoCountDataString;
+import static com.concepttech.campingcompanionbluetooth.Constants.GetDatabaseLocationString;
 import static com.concepttech.campingcompanionbluetooth.Constants.HomeFragmentLaunchConnection;
 import static com.concepttech.campingcompanionbluetooth.Constants.HomeFragmentLaunchLights;
 import static com.concepttech.campingcompanionbluetooth.Constants.HomeFragmentLaunchLocation;
@@ -30,6 +37,9 @@ import static com.concepttech.campingcompanionbluetooth.Constants.HomeFragmentLa
 import static com.concepttech.campingcompanionbluetooth.Constants.LabelIndex;
 import static com.concepttech.campingcompanionbluetooth.Constants.LightsFragmentBack;
 import static com.concepttech.campingcompanionbluetooth.Constants.LightsFragmentChangeColor;
+import static com.concepttech.campingcompanionbluetooth.Constants.MainLocationTag;
+import static com.concepttech.campingcompanionbluetooth.Constants.PhotoCountIntentID;
+import static com.concepttech.campingcompanionbluetooth.Constants.PhotoCountTag;
 import static com.concepttech.campingcompanionbluetooth.Constants.isValidLabel;
 
 public class Main extends FragmentActivity implements ConnectionFragment.ConnectionFragmentCallback,
@@ -44,7 +54,7 @@ public class Main extends FragmentActivity implements ConnectionFragment.Connect
     int timeout =0;
     private static final int REQUEST_ENABLE_BT = 3;
     private boolean RTR1 = false , RTR2 = false, messagetypevalid = false , ResReq = false, BluetoothDeviceFound,StatusGood = false, InitialSetUpDone = false,
-    LocationLoaded = false, StatusLoaded = false, HomeLoaded = false;
+    LocationLoaded = false, StatusLoaded = false, HomeLoaded = false, CameraLaunched = false;
     private String mConnectedDeviceName = null, TAG = "MainActivity", DeviceMAC;
     private CustomBlueToothAdapter mCustomBluetoothAdapter = null;
     private BluetoothAdapter mBluetoothAdapter = null;
@@ -61,8 +71,22 @@ public class Main extends FragmentActivity implements ConnectionFragment.Connect
         CancelTimer();
         LaunchHomeFragment();
     }
-    public void FeedFragmentCallback(String command){
-        LaunchHomeFragment();
+    public void FeedFragmentCallback(String command, String[] extras){
+        switch (command){
+            case FeedFragmentHomeCommand:
+                LaunchHomeFragment();
+                break;
+            case FeedCameraCommand:
+                String Location = GetDatabaseLocationString(extras[0], extras[1], extras[2], extras[3]);
+                String photolocation = FirebaseDatabase.getInstance().getReference().push().getKey();
+                String LocationDataString = GetDatabaseLocationPhotoCountDataString(extras[0], extras[1], extras[2], extras[3]);
+                Intent cameraintent = new Intent(context, CameraActivity.class);
+                cameraintent.putExtra(MainLocationTag,Location+ "/"+photolocation);
+                cameraintent.putExtra(PhotoCountTag,LocationDataString);
+                cameraintent.putExtra(PhotoCountIntentID,Integer.valueOf(extras[4]));
+                startActivity(cameraintent);
+                break;
+        }
     }
     public void MapFragmentCallBack(){
         LocationLoaded = false;
@@ -116,11 +140,8 @@ public class Main extends FragmentActivity implements ConnectionFragment.Connect
                     HomeLoaded = false;
                     break;
                 case HomeFragmentLaunchLog:
+                    LaunchFeedFragment();
                     HomeLoaded = false;
-                    if(Feedfragment == null) Feedfragment = new FeedFragment();
-                    Feedfragment.SetParameters(deviceState,context);
-                    transaction.replace(R.id.fragment_holder, Feedfragment);
-                    transaction.commit();
                     break;
                 case HomeFragmentLaunchConnection:
                     LaunchConnectionFragment();
@@ -189,11 +210,27 @@ public class Main extends FragmentActivity implements ConnectionFragment.Connect
         }
         if(Connectionfragment != null) Connectionfragment.Cleanup();
         CancelTimer();
+        if(isFinishing()) Write(BuildHeader(4,0));
     }
     @Override
     public void onBackPressed(){
         if (!HomeLoaded) LaunchHomeFragment();
         else finish();
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(CameraLaunched) {
+            LaunchFeedFragment();
+            CameraLaunched = false;
+        }
+    }
+    private void LaunchFeedFragment(){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        if(Feedfragment == null) Feedfragment = new FeedFragment();
+        Feedfragment.SetParameters(deviceState,context);
+        transaction.replace(R.id.fragment_holder, Feedfragment);
+        transaction.commit();
     }
     private void LaunchHomeFragment(){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -348,9 +385,7 @@ public class Main extends FragmentActivity implements ConnectionFragment.Connect
                 //should never reach this as a recieved message on the phone
                 CommandMessage(message);
                 break;
-            case Constants.SOCIALMESSAGE:
-                //should never reach this as a recieved message on the phone
-                SocialMessage(message);
+            case Constants.Disconnect:
                 break;
             case Constants.COMMANDCONFIRMATION:
                 CommandConfirmMessage(message);
@@ -536,7 +571,7 @@ public class Main extends FragmentActivity implements ConnectionFragment.Connect
         //TODO: pass command to write function after checking validity
     }
     private String BuildHeader(int messagetype, int numargs){
-        if(messagetype >= 0 && messagetype <= Constants.MESSAGETYPEMAXVALUE && numargs > 0){
+        if(messagetype >= 0 && messagetype <= Constants.MESSAGETYPEMAXVALUE && numargs >0){
             if(messagetype >= 0 && messagetype <= Constants.MESSAGETYPEMAXVALUE){
                 return Constants.BODYBEGIN + Constants.MTYPE + Constants.LABELDATASEP + messagetype +
                         Constants.DATAEND + Constants.MARGS + Constants.LABELDATASEP + numargs +

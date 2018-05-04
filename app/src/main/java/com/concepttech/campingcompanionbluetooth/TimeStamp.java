@@ -7,9 +7,11 @@ import com.concepttech.campingcompanionbluetooth.Constants;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 /**
  * Created by jtint on 6/13/2017.
@@ -73,7 +75,8 @@ import java.util.Map;
     String get_time_string(){
         Calendar time = Calendar.getInstance();
         time.setTimeInMillis(Milliseconds);
-        return month + "/" + day + "/" + year + " " + time.get(Calendar.HOUR_OF_DAY)+ ":" + time.get(Calendar.MINUTE)+ time.get(Calendar.AM_PM);
+        time.setTimeZone(TimeZone.getDefault());
+        return month + "/" + day + "/" + year + " " + (time.get(Calendar.HOUR_OF_DAY) % 12)+ ":" + time.get(Calendar.MINUTE)+ (time.get(Calendar.AM_PM) == 1 ?" AM":" PM");
     }
     Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();

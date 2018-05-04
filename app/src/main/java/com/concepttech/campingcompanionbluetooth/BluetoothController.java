@@ -374,7 +374,7 @@ public class BluetoothController extends Fragment implements SeekBar.OnSeekBarCh
                     //should never reach this as a recieved message on the phone
                     CommandMessage(message);
                     break;
-                case Constants.SOCIALMESSAGE:
+                case Constants.Disconnect:
                     //should never reach this as a recieved message on the phone
                     SocialMessage(message);
                     break;

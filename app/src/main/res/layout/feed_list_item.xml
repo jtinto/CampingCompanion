@@ -3,12 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/Clear"
+    android:layout_height="match_parent"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/white_semi_transparent_roundedcorners"
     android:orientation="vertical">
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_gravity="end"
         android:background="@drawable/ic_more_vert_white_24dp"/>
     <ImageView
@@ -19,9 +21,10 @@
         android:id="@+id/FeedListItemImageView"
         tools:ignore="ContentDescription" />
     <TextView
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/FeedListItemText"
-        android:layout_gravity="center"/>
+        android:gravity="center"/>
 
 </LinearLayout>
